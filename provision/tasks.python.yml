@@ -13,8 +13,8 @@
   apt: name=libncursesw5-dev state=latest
 - name: Install libreadline6-dev
   apt: name=libreadline6-dev state=latest
-- name: Install libdb5.1-dev
-  apt: name=libdb5.1-dev state=latest
+- name: Install libdb5.3-dev
+  apt: name=libdb5.3-dev state=latest
 - name: Install libgdbm-dev
   apt: name=libgdbm-dev state=latest
 - name: Install libsqlite3-dev

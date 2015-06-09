@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "insta"
   config.vm.post_up_message = "insta dev server successfuly started.
     Connect to host with:
-    http://10.1.1.170/
+    http://10.1.1.123/
     or over ssh with `vagrant ssh`
 
     Admin user credentials:
