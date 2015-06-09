@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from os.path import join
-from easy_thumbnails.conf import Settings as thumbnail_settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
