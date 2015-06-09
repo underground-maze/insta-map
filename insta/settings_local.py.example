@@ -1,0 +1,24 @@
+# Local settings
+
+ALLOWED_HOSTS = ('10.1.1.123', )
+
+# Turn debug mode on
+DEBUG = True
+TEMPLATE_DEBUG = True
+
+# Database connection
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'insta',
+        'USER': 'insta',
+        'PASSWORD': 'eXKce0VV',
+        'HOST': '127.0.0.1',
+    }
+}
+
+DEFAULT_FROM_EMAIL = 'no-reply@insta.com'
+EMAIL_HOST = 'debugmail.io'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'samael500@gmail.com'
+EMAIL_HOST_PASSWORD = 'd6b2d120-0e94-11e5-9683-afa17037bc5a'
