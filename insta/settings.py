@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     # additional apps
 
     # insta apps
-)
+)   'index',
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
