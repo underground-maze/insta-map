@@ -1,6 +1,7 @@
 Vagrant.configure(2) do |config|
   # Virtual machine parameters
-  config.vm.box = "chef/debian-7.8"
+  config.vm.box = "Samael500/insta"
+  # config.vm.box = "chef/debian-7.8"
   config.vm.network "private_network", ip: "10.1.1.123"
   config.vm.synced_folder ".", "/home/vagrant/proj"
   config.vm.hostname = "insta"
