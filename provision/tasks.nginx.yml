@@ -12,5 +12,5 @@
   template: src=templates/nginx-host.j2 dest=/etc/nginx/sites-available/{{ project_name }}
 - name: Enable project host
   command: >
-  ln -s -f /etc/nginx/sites-available/{{ project_name }} /etc/nginx/sites-enabled/{{ project_name }}
+    ln -s -f /etc/nginx/sites-available/{{ project_name }} /etc/nginx/sites-enabled/{{ project_name }}
   notify: restart nginx

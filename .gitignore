@@ -59,3 +59,5 @@ target/
 
 ### custon
 settings_local.py
+venv/
+.vagrant/
