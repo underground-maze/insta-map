@@ -1,0 +1,25 @@
+server {
+
+    listen {{ http_port }};
+    server_name {{ http_host }};
+
+    client_max_body_size 25m;
+
+    location /robots.txt {
+        echo "User-Agent: *";
+        echo "Disallow: /";
+    }
+
+    location / {
+        try_files $uri $uri/ @django;
+        root {{ root_dir }}/static;
+        sendfile  off;
+    }
+
+    location @django {
+        proxy_pass          http://localhost:8000;
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+    }
+
+}
