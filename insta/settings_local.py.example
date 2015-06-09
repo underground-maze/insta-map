@@ -1,6 +1,6 @@
 # Local settings
 
-ALLOWED_HOSTS = ('10.1.1.123', )
+ALLOWED_HOSTS = ('10.1.1.123', '*', )
 
 # Turn debug mode on
 DEBUG = True

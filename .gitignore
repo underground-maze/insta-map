@@ -61,3 +61,4 @@ target/
 settings_local.py
 venv/
 .vagrant/
+static/
