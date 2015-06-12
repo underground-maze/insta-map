@@ -1,0 +1,51 @@
+# Install prerequisites for python 3.4 building
+- name: Install python-dev
+  apt: name=python-dev state=latest
+- name: Install python-pip
+  apt: name=python-pip state=latest
+- name: Install python-virtualenv
+  apt: name=python-virtualenv state=latest
+- name: Install build-essential
+  apt: name=build-essential state=latest
+- name: Install libncurses5-dev
+  apt: name=libncurses5-dev state=latest
+- name: Install libncursesw5-dev
+  apt: name=libncursesw5-dev state=latest
+- name: Install libreadline6-dev
+  apt: name=libreadline6-dev state=latest
+- name: Install libdb5.3-dev
+  apt: name=libdb5.3-dev state=latest
+- name: Install libgdbm-dev
+  apt: name=libgdbm-dev state=latest
+- name: Install libsqlite3-dev
+  apt: name=libsqlite3-dev state=latest
+- name: Install libssl-dev
+  apt: name=libssl-dev state=latest
+- name: Install libbz2-dev
+  apt: name=libbz2-dev state=latest
+- name: Install libexpat1-dev
+  apt: name=libexpat1-dev state=latest
+- name: Install liblzma-dev
+  apt: name=liblzma-dev state=latest
+- name: Install zlib1g-dev
+  apt: name=zlib1g-dev state=latest
+- name: Install libxml2-dev
+  apt: name=libxml2-dev state=latest
+- name: Install libxslt1-dev
+  apt: name=libxslt1-dev state=latest
+# Build python 3.4
+- name: Download Python 3.4 sources
+  get_url: url=https://www.python.org/ftp/python/3.4.2/Python-3.4.2.tgz dest=/tmp
+- name: Uncompress sources archive
+  unarchive: src=/tmp/Python-3.4.2.tgz dest=/tmp copy=no
+- name: Configuring Python 3.4 Makefile
+  shell: cd /tmp/Python-3.4.2 && ./configure --prefix=/usr/local/python-3.4.2
+- name: Compiling the Python 3.4 source code
+  shell: cd /tmp/Python-3.4.2 && make
+- name: Install compiled Python 3.4 binaries
+  shell: cd /tmp/Python-3.4.2 && make install
+- name: Clean /tmp directory from temporary Python 3.4 files
+  shell: rm -rf /tmp/Pytohn-3.4.2*
+- name: Create links to Python 3.4 binaries
+  shell: ln -s /usr/local/python-3.4.2/bin/* /usr/local/bin/
+  ignore_errors: yes

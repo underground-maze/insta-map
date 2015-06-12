@@ -1,0 +1,16 @@
+---
+
+- name: Install Nginx
+  apt: name=nginx state=latest
+  notify: restart nginx
+- name: Remove default host
+  shell: rm /etc/nginx/sites-enabled/default && rm /etc/nginx/sites-available/default
+  ignore_errors: yes
+  args:
+    removes: /etc/nginx/sites-available/default
+- name: Project host config
+  template: src=templates/nginx-host.j2 dest=/etc/nginx/sites-available/{{ project_name }}
+- name: Enable project host
+  command: >
+    ln -s -f /etc/nginx/sites-available/{{ project_name }} /etc/nginx/sites-enabled/{{ project_name }}
+  notify: restart nginx

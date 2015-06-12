@@ -1,0 +1,18 @@
+---
+
+- name: Install PostgreSQL
+  apt: name=postgresql state=latest
+- name: Install postgresql-server-dev-all
+  apt: name=postgresql-server-dev-all state=latest
+- name: Set password for postgres user
+  shell: >
+    sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';"
+- name: Install python-psycopg2
+  apt: name=python-psycopg2 state=latest
+- name: Create postgresql database
+  postgresql_db: >
+    name={{ project_name }} login_password='{{ postgres_password }}' login_user='postgres' login_host='127.0.0.1'
+- name: Create postgresql user
+  postgresql_user: >
+    db={{ project_name }} name={{ project_name }} password='{{ postgres_password }}'
+    login_password='{{ postgres_password }}' login_user='postgres' role_attr_flags='CREATEDB' login_host='127.0.0.1'

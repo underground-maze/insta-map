@@ -1,0 +1,26 @@
+---
+
+# Install requirements
+- name: Create virtualenv
+  shell: cd {{ root_dir }} && pyvenv-3.4 venv
+  sudo: no
+- name: Install required python packages with pip from wheels archive
+  shell: cd {{ root_dir }} && venv/bin/pip install --no-index -f wheels/ -r requirements.txt
+  sudo: no
+- name: Collectstatic
+  django_manage: command=collectstatic app_path={{ root_dir }} virtualenv={{ root_dir }}/venv
+- name: Sync database
+  django_manage: command=syncdb app_path={{ root_dir }} virtualenv={{ root_dir }}/venv
+- name: Create user
+  shell: >
+    echo "from django.contrib.auth.models import User;
+    User.objects.create_superuser({{ user_data }})" | venv/bin/python manage.py shell
+  args:
+    chdir: "{{ root_dir }}"
+  sudo: no
+- name: Start runserver
+  shell: >
+    venv/bin/gunicorn --preload -D -b 0.0.0.0:8000 {{ project_name }}.wsgi:application
+  args:
+    chdir: "{{ root_dir }}"
+  sudo: no

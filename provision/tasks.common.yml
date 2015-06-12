@@ -1,0 +1,30 @@
+---
+
+# Change locale
+- name: Change locale
+  template: src=templates/locale.gen.j2 dest=/etc/locale.gen
+- name: Set LC_ALL in /etc/environment
+  template: src=templates/environment.j2 dest=/etc/environment
+- name: Run locale-gen
+  shell: locale-gen
+# Debian sources
+- name: Clear sources.list
+  template: src=templates/sources.list.j2 dest=/etc/apt/sources.list
+- name: Update repo
+  apt: update_cache=yes
+# Install common required packages
+- name: Install curl
+  apt: name=curl state=latest
+- name: Install Git
+  apt: name=git-core state=latest
+- name: Install libjpeg-dev
+  apt: name=libjpeg-dev state=latest
+- name: Install libevent-dev
+  apt: name=libevent-dev state=latest
+# Install python
+- name: Check is python installed
+  stat: path=/usr/local/bin/python3.4 get_md5=False
+  register: python_binary
+  ignore_errors: True
+- include: tasks.python.yml
+  when: not python_binary.stat.exists

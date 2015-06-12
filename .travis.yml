@@ -1,0 +1,10 @@
+language: python
+python:
+  - 3.4
+install:
+  - pip install --no-index -f wheels/ -r requirements.txt
+env:
+  - TRAVIS=TRAVIS
+script: make ci_test
+notifications:
+  webhooks: https://api.kato.im/rooms/6ede0e9d951fda78abd22376694266a375a1dcdcae23902185662a1f65bc0805/travis
