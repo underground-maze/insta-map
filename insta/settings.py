@@ -112,3 +112,9 @@ try:
     from settings_local import *  # noqa
 except ImportError:
     pass
+
+try:
+    if 'TRAVIS' in os.environ:
+        from settings_travis import *  # noqa
+except ImportError:
+    pass
