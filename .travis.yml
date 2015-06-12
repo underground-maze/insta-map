@@ -1,0 +1,8 @@
+language: python
+python:
+  - 3.4
+install:
+  - pip install --no-index -f wheels/ -r requirements.txt
+env:
+  - TRAVIS=TRAVIS
+script: make ci_test
