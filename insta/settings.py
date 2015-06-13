@@ -44,9 +44,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # additional apps
-
+    'geoposition',
     # insta apps
     'index',
+    'cards',
 )
 
 MIDDLEWARE_CLASSES = (
