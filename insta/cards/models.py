@@ -2,10 +2,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator 
+from django.conf import settings
 
 from geoposition.fields import GeopositionField
 
 from helpers.service import video_path
+from helpers.youtube import upload_video
 
 
 class CardActiveManager(models.Manager):
@@ -74,3 +76,26 @@ class Card(models.Model):
 
     def get_absolute_url(self):
         return '?card={id}'.format(id=self.pk)
+
+    def youtube_meta_data(self):
+        """ Create metadata dict for youtube video upload """
+        return dict(
+            snippet=dict(
+                title=settings.YOUTUBE_TITLE.format(coord=self.position),
+                tags=settings.YOUTUBE_TAGS,
+                categoryId=settings.YOUTUBE_CATEGORY_ID,
+                description=self.description,
+            ),
+            status=dict(
+                privacyStatus=settings.YOUTUBE_PRIVACY_STATUS,
+            ),
+            recordingDetails=dict(
+                location=dict(
+                    latitude=self.position.latitude,
+                    longitude=self.position.longitude,
+                ),
+            ),
+        )
+
+    def upload_on_youtube(self):
+        upload_video(self)

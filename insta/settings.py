@@ -102,12 +102,21 @@ TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
 SERVER_EMAIL = 'notification@insta.com'
 ADMINS = (('Maks', 'samael500@gmail.com'), )
 
-# email settings
-DEFAULT_FROM_EMAIL = 'no-reply@insta.com'
-EMAIL_HOST = 'debugmail.io'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'samael500@gmail.com'
-EMAIL_HOST_PASSWORD = 'd6b2d120-0e94-11e5-9683-afa17037bc5a'
+# youtube api settings
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
+YOUTUBE_UPLOAD_SCOPE = 'https://www.googleapis.com/auth/youtube.upload'
+# secure connection settings
+YOUTUBE_REFRESH_TOKEN = '<secret>'
+YOUTUBE_CLIENT_ID = '<secret>'
+YOUTUBE_CLIENT_SECRET = '<secret>'
+# youtube video upload settings
+YOUTUBE_CHUNKSIZE = -1
+YOUTUBE_CATEGORY_ID = 19
+YOUTUBE_TITLE = 'I am discoverer {coord}'
+YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
+YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
+YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
 
 try:
     from settings_local import *  # noqa
