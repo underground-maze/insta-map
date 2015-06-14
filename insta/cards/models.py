@@ -7,6 +7,7 @@ from geoposition.fields import GeopositionField
 
 from helpers.service import video_path
 from helpers.youtube import upload_video
+from helpers.validators import validate_video
 
 
 class CardActiveManager(models.Manager):
@@ -32,7 +33,8 @@ class Card(models.Model):
 
     user = models.ForeignKey(User, verbose_name='Автор')
     position = GeopositionField(verbose_name='Координаты')
-    video = models.FileField(verbose_name='Видеофайл', upload_to=video_path)
+    video = models.FileField(
+        verbose_name='Видеофайл', upload_to=video_path, blank=True, null=True, validators=[validate_video])
     youtube_id = models.CharField(verbose_name='ID видео на youtube', blank=True, null=True, max_length=32)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
     radius = models.PositiveSmallIntegerField(verbose_name='Радиус (км)', default=10)

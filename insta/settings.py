@@ -118,6 +118,10 @@ YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
 YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
 YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
 
+# video validation settings
+VIDEO_MIME_TYPES = ('application/ogg', 'video/quicktime')
+VIDEO_EXT = ('ogv', 'mov')
+
 try:
     from settings_local import *  # noqa
 except ImportError:
