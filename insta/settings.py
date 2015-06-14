@@ -90,8 +90,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
-MEDIA_URL = '/static/img/'
-MEDIA_ROOT = 'static/img/'
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT = 'static/media/'
 
 TEMPLATE_DIRS = (join(BASE_DIR, 'insta', 'templates'), )
 
@@ -112,7 +112,7 @@ YOUTUBE_CLIENT_ID = '<secret>'
 YOUTUBE_CLIENT_SECRET = '<secret>'
 # youtube video upload settings
 YOUTUBE_CHUNKSIZE = -1
-YOUTUBE_CATEGORY_ID = 19
+YOUTUBE_CATEGORY_ID = 19  # travel
 YOUTUBE_TITLE = 'I am discoverer {coord}'
 YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
 YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')

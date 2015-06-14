@@ -67,7 +67,7 @@ def initialize_upload(youtube, card):
     # Call the API's videos.insert method to create and upload the video
     insert_request = youtube.videos().insert(
         part=",".join(body.keys()), body=body,
-        media_body=MediaFileUpload(card.file, chunksize=settings.YOUTUBE_CHUNKSIZE, resumable=True))
+        media_body=MediaFileUpload(card.video.path, chunksize=settings.YOUTUBE_CHUNKSIZE, resumable=True))
     # wait for file uploading
     video_id = resumable_upload(insert_request)
     if video_id is not None:

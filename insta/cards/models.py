@@ -90,8 +90,8 @@ class Card(models.Model):
             ),
             recordingDetails=dict(
                 location=dict(
-                    latitude=self.position.latitude,
-                    longitude=self.position.longitude,
+                    latitude=str(self.position.latitude),
+                    longitude=str(self.position.longitude),
                 ),
             ),
         )
