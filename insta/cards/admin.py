@@ -26,7 +26,7 @@ class CardAdmin(admin.ModelAdmin):
 
     readonly_fields = ('created_at', 'checked_at', )
 
-    list_display = ('pk', '__str__', 'status', 'pretty_status')
+    list_display = ('pk', '__str__', 'status', 'pretty_status', 'video_url')
     list_display_links = ('pk', '__str__')
     list_filter = (CardStatusFilter, )
 
@@ -36,6 +36,12 @@ class CardAdmin(admin.ModelAdmin):
         return obj.is_accepted
     pretty_status.boolean = True
     pretty_status.short_description = 'Статус'
+
+    def video_url(self, obj):
+        if obj.video_url:
+            return '<a href="{url}">{id}</a>'.format(url=obj.video_url, id=obj.youtube_id)
+    video_url.allow_tags = True
+    video_url.short_description = 'Видео на youtube'
 
 
 admin.site.register(Card, CardAdmin)

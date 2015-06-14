@@ -68,6 +68,10 @@ class Card(models.Model):
     def is_rejected(self):
         return self.status == self.STATUS_REJECTED
 
+    @property
+    def video_url(self):
+        return settings.YOUTUBE_VIDEO_URL.format(video_id=self.youtube_id) if self.youtube_id else None
+
     def save(self, *args, **kwargs):
         # set date of check if change status from new - to other and if not checked already
         if not self.checked_at and not self.is_new:

@@ -20,4 +20,4 @@ ci_test:
 	pylama --skip=*migrations* -l pyflakes insta/
 
 celery:
-	venv/bin/celery --app=insta.celery:app worker
+	venv/bin/celery --app=insta.celery:app worker --loglevel=INFO
