@@ -127,6 +127,7 @@ VIDEO_EXT = ('.ogv', '.mov', '.mp4', '.avi', '.mpg', '.wmv')
 BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ('pickle', 'json', )
 
 
 try:

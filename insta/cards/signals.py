@@ -12,7 +12,7 @@ def escape_tags(sender, instance, **kwargs):
 
 def upload_on_youtube(sender, instance, **kwargs):
     """ Signal for async upload video on youtube """
-    if instance.youtube_id is None:
+    if not instance.youtube_id:
         upload_on_youtube_task.delay(instance)
 
 
