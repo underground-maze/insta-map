@@ -8,3 +8,5 @@ psycopg2==2.5.4
 pylama==6.0.1
 django-rainbowtests==0.2.1
 -e git://github.com/Samael500/django-geoposition.git@master#egg=django-geoposition
+httplib2==0.9.1
+google-api-python-client==1.4.0
