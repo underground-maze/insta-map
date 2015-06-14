@@ -69,10 +69,7 @@ def initialize_upload(youtube, card):
         part=",".join(body.keys()), body=body,
         media_body=MediaFileUpload(card.video.path, chunksize=settings.YOUTUBE_CHUNKSIZE, resumable=True))
     # wait for file uploading
-    video_id = resumable_upload(insert_request)
-    if video_id is not None:
-        card.youtube_id = video_id
-        card.save()
+    return resumable_upload(insert_request)
 
 
 def resumable_upload(insert_request):
@@ -102,4 +99,7 @@ def resumable_upload(insert_request):
 
 
 def upload_video(card):
-    initialize_upload(get_authenticated_service(), card)
+    video_id = initialize_upload(get_authenticated_service(), card)
+    if video_id is not None:
+        card.youtube_id = video_id
+        card.save()

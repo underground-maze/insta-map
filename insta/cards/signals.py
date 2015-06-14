@@ -2,6 +2,7 @@ from django.db.models.signals import post_save, pre_save
 from django.utils.html import strip_tags
 
 from cards.models import Card
+from cards.tasks import upload_on_youtube_task
 
 
 def escape_tags(sender, instance, **kwargs):
@@ -12,7 +13,7 @@ def escape_tags(sender, instance, **kwargs):
 def upload_on_youtube(sender, instance, **kwargs):
     """ Signal for async upload video on youtube """
     if instance.youtube_id is None:
-        instance.upload_on_youtube()
+        upload_on_youtube_task.delay(instance)
 
 
 pre_save.connect(escape_tags, sender=Card)

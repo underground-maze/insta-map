@@ -6,7 +6,6 @@ from django.conf import settings
 from geoposition.fields import GeopositionField
 
 from helpers.service import video_path
-from helpers.youtube import upload_video
 from helpers.validators import validate_video
 
 
@@ -97,6 +96,3 @@ class Card(models.Model):
                 ),
             ),
         )
-
-    def upload_on_youtube(self):
-        upload_video(self)
