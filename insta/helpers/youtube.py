@@ -1,8 +1,9 @@
-import http
-import httplib2
 import random
 import json
 import time
+
+import http
+import httplib2
 
 import urllib
 import urllib.request
@@ -12,7 +13,6 @@ from apiclient.errors import HttpError
 from apiclient.http import MediaFileUpload
 
 from oauth2client.client import AccessTokenCredentials
-from oauth2client.tools import argparser
 
 from django.conf import settings
 
