@@ -119,8 +119,9 @@ YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
 YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
 
 # video validation settings
-VIDEO_MIME_TYPES = ('application/ogg', 'video/quicktime')
-VIDEO_EXT = ('ogv', 'mov')
+VIDEO_MIME_TYPES = (
+    'application/ogg', 'video/quicktime', 'video/mp4', 'video/x-msvideo', 'video/mpeg', 'video/x-ms-wmv')
+VIDEO_EXT = ('.ogv', '.mov', '.mp4', '.avi', '.mpg', '.wmv')
 
 try:
     from settings_local import *  # noqa
