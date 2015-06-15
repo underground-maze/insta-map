@@ -3,23 +3,6 @@ from django.contrib import admin
 from cards.models import Card, YoutubeLogger
 
 
-class CardStatusFilter(admin.SimpleListFilter):
-
-    """ Filter to select cards 'new', 'accepted', 'rejected' """
-
-    title = 'Статус'
-    parameter_name = 'status'
-
-    def lookups(self, request, model_admin):
-        return Card.STATUS_CHOICES
-
-    def queryset(self, request, queryset):
-        value = self.value()
-        if value in (status[0] for status in Card.STATUS_CHOICES):
-            return queryset.filter(status=value)
-        return queryset
-
-
 class CardAdmin(admin.ModelAdmin):
 
     """ Card admin class """
@@ -28,7 +11,7 @@ class CardAdmin(admin.ModelAdmin):
 
     list_display = ('pk', '__str__', 'status', 'pretty_status', 'video_url')
     list_display_links = ('pk', '__str__')
-    list_filter = (CardStatusFilter, )
+    list_filter = ('status', )
 
     def pretty_status(self, obj):
         if obj.is_new:
@@ -49,10 +32,11 @@ class YoutubeLoggerAdmin(admin.ModelAdmin):
     """ YoutubeLogger admin class """
 
     readonly_fields = ('card', 'upload_at', 'status', 'description', )
-    fields = ('card_link', 'upload_at', 'status', 'description', )
 
-    list_display = ('pk', '__str__', 'pretty_status', )
+    list_display = ('pk', '__str__', 'pretty_status', 'card_link')
     list_display_links = ('pk', '__str__')
+    list_filter = ('status', )
+
 
     def pretty_status(self, obj):
         return obj.is_success
@@ -68,7 +52,7 @@ class YoutubeLoggerAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
-    def has_delete_permission(self, request):
+    def has_delete_permission(self, request, obj=None):
         return False
 
 

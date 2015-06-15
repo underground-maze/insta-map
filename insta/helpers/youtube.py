@@ -113,7 +113,9 @@ def upload_video(card):
         card.save()
     except Exception as error:
         # save youtube log model with error
-        kwargs = dict(card=card, status=YoutubeLogger.STATUS_ERRORED, description=traceback.format_exc())
+        description = 'TRACEBACK:\n{trace}\n---\n\nEXCEPTION:\n{exc}'.format(
+            trace=traceback.format_exc(), exc=str(error.args))
+        kwargs = dict(card=card, status=YoutubeLogger.STATUS_ERRORED, description=description)
     else:
         # save youtube log model with success
         kwargs = dict(card=card, status=YoutubeLogger.STATUS_SUCCESS, description=card.video_url)
