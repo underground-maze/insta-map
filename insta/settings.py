@@ -124,6 +124,8 @@ YOUTUBE_VIDEO_URL = 'http://youtu.be/{video_id}'
 VIDEO_MIME_TYPES = (
     'application/ogg', 'video/quicktime', 'video/mp4', 'video/x-msvideo', 'video/mpeg', 'video/x-ms-wmv')
 VIDEO_EXT = ('.ogv', '.mov', '.mp4', '.avi', '.mpg', '.wmv')
+VIDEO_MAX_SIZE = 1024 * 1024 * 1024  # 1 Gb
+VIDEO_MIN_SIZE = 1024 * 1024 * 10    # 10 Mb
 
 # CELERY SETTINGS
 BROKER_URL = 'redis://localhost:6379/0'
