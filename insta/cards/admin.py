@@ -31,12 +31,12 @@ class YoutubeLoggerAdmin(admin.ModelAdmin):
 
     """ YoutubeLogger admin class """
 
-    readonly_fields = ('card', 'upload_at', 'status', 'description', )
+    readonly_fields = ('card', 'upload_at', 'status', 'description', 'card_link')
+    fieldsets = ((None, {'fields': ('card_link', 'upload_at', 'status', 'description')}), )
 
     list_display = ('pk', '__str__', 'pretty_status', 'card_link')
     list_display_links = ('pk', '__str__')
     list_filter = ('status', )
-
 
     def pretty_status(self, obj):
         return obj.is_success
