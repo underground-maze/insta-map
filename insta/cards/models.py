@@ -111,9 +111,16 @@ class YoutubeLogger(models.Model):
 
     STATUS_CHOICES = (
         (STATUS_SUCCESS, 'SUCCESS'),
-        (STATUS_ERRORED, 'ERROR'),
+        (STATUS_ERRORED, 'ERROR'), )
 
     card = models.ForeignKey(Card, verbose_name='Карточка')
     upload_at = models.DateTimeField(verbose_name='Дата загрузки', default=timezone.now)
     status = models.PositiveSmallIntegerField(verbose_name='Состояние загрузки', choices=STATUS_CHOICES)
     description = models.TextField(verbose_name='Описание')
+
+    def __str__(self):
+        return '#{pk} card:{card} {status}'.format(pk=self.pk, card=self.card.pk, status=self.get_status_display())
+
+    @property
+    def is_success(self):
+        return self.status == self.STATUS_SUCCESS

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from cards.models import Card
+from cards.models import Card, YoutubeLogger
 
 
 class CardStatusFilter(admin.SimpleListFilter):
@@ -44,4 +44,33 @@ class CardAdmin(admin.ModelAdmin):
     video_url.short_description = 'Видео на youtube'
 
 
+class YoutubeLoggerAdmin(admin.ModelAdmin):
+
+    """ YoutubeLogger admin class """
+
+    readonly_fields = ('card', 'upload_at', 'status', 'description', )
+    fields = ('card_link', 'upload_at', 'status', 'description', )
+
+    list_display = ('pk', '__str__', 'pretty_status', )
+    list_display_links = ('pk', '__str__')
+
+    def pretty_status(self, obj):
+        return obj.is_success
+    pretty_status.boolean = True
+    pretty_status.short_description = 'Статус'
+
+    def card_link(self, obj):
+        return '<a href="/admin/cards/card/{card}/">{card_info}</a>'.format(
+            card=obj.card.pk, card_info=str(obj.card))
+    card_link.allow_tags = True
+    card_link.short_description = 'Карточка'
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request):
+        return False
+
+
 admin.site.register(Card, CardAdmin)
+admin.site.register(YoutubeLogger, YoutubeLoggerAdmin)
