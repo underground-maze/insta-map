@@ -8,7 +8,6 @@ from django.conf import settings
 
 from helpers.tests import InstaTransactionTestCase
 from cards.models import Card
-from cards.admin import CardStatusFilter, CardAdmin
 
 
 class TestCardModels(InstaTransactionTestCase):
@@ -107,45 +106,6 @@ class TestCardModels(InstaTransactionTestCase):
         # check counts
         self.assertEquals(self.model.objects.count(), 1)
         self.assertEquals(self.model.active.count(), 0)
-
-    def _create_cards(self, count):
-        for i in range(count):
-            self.model.objects.create(status=Card.STATUS_ACCEPTED, **self.kwargs)
-
-    def test_admin_filter(self):
-        """ Check filtration in django admin """
-        # set initial data
-        self._create_cards(30)
-        Card.objects.filter(pk__in=(1, 3, 5, 7)).update(status=Card.STATUS_NEW)
-        Card.objects.filter(pk__in=(2, 4, 6)).update(status=Card.STATUS_REJECTED)
-        # autenticate
-        factory = RequestFactory()
-        # default filter
-        request = factory.get(self.admin_url)
-        card_filter = CardStatusFilter(request, '', Card, CardAdmin)
-        queryset = card_filter.queryset(request, Card.objects.all())
-        self.assertEquals(queryset.count(), 31)
-        # filter accepted
-        request = factory.get(self.admin_url + '?status=accepted')
-        card_filter = CardStatusFilter(request, dict(status='accepted'), Card, CardAdmin)
-        queryset = card_filter.queryset(request, Card.objects.all())
-        self.assertEquals(queryset.count(), 24)
-        for instance in queryset:
-            self.assertTrue(instance.is_accepted)
-        # filter new
-        request = factory.get(self.admin_url + '?status=new')
-        card_filter = CardStatusFilter(request, dict(status='new'), Card, CardAdmin)
-        queryset = card_filter.queryset(request, Card.objects.all())
-        self.assertEquals(queryset.count(), 4)
-        for instance in queryset:
-            self.assertTrue(instance.is_new)
-        # filter rejected
-        request = factory.get(self.admin_url + '?status=rejected')
-        card_filter = CardStatusFilter(request, dict(status='rejected'), Card, CardAdmin)
-        queryset = card_filter.queryset(request, Card.objects.all())
-        self.assertEquals(queryset.count(), 3)
-        for instance in queryset:
-            self.assertTrue(instance.is_rejected)
 
     def create_stream(self, file_format, size):
         """ Create temporary stream """
