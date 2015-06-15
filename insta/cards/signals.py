@@ -14,6 +14,8 @@ def upload_on_youtube(sender, instance, **kwargs):
     """ Signal for async upload video on youtube """
     if not instance.youtube_id:
         upload_on_youtube_task.delay(instance)
+        instance.youtube_id = 'uploading...'
+        instance.save()
 
 
 pre_save.connect(escape_tags, sender=Card)
