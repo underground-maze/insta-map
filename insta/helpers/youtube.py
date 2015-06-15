@@ -1,6 +1,7 @@
 import random
 import json
 import time
+import traceback
 
 import http
 import httplib2
@@ -15,6 +16,8 @@ from apiclient.http import MediaFileUpload
 from oauth2client.client import AccessTokenCredentials
 
 from django.conf import settings
+
+from cards.models import YoutubeLogger
 
 
 # Explicitly tell the underlying HTTP transport library not to retry, since we are handling retry logic ourselves.
@@ -92,14 +95,27 @@ def resumable_upload(insert_request):
         if error:
             retry += 1
             if retry > MAX_RETRIES:
-                return
+                raise Exception('Maximum retry are fail')
 
             sleep_seconds = random.random() * 2 ** retry
             time.sleep(sleep_seconds)
 
 
 def upload_video(card):
-    video_id = initialize_upload(get_authenticated_service(), card)
-    if video_id is not None:
+    try:
+        # try to upload video
+        video_id = initialize_upload(get_authenticated_service(), card)
+        # if failed uploading raise error
+        if video_id is None:
+            raise Exception('Video ID is None')
+        # if success uploading save video id to card
         card.youtube_id = video_id
         card.save()
+    except Exception as error:
+        # save youtube log model with error
+        kwargs = dict(card=card, status=YoutubeLogger.STATUS_ERRORED, description=traceback.format_exc())
+    else:
+        # save youtube log model with success
+        kwargs = dict(card=card, status=YoutubeLogger.STATUS_SUCCESS, description=card.video_url)
+    finally:
+        YoutubeLogger.objects.create(**kwargs)

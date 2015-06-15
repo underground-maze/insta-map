@@ -100,3 +100,20 @@ class Card(models.Model):
                 ),
             ),
         )
+
+
+class YoutubeLogger(models.Model):
+
+    """ Log the youtube video upload status """
+
+    STATUS_SUCCESS = 0
+    STATUS_ERRORED = 1
+
+    STATUS_CHOICES = (
+        (STATUS_SUCCESS, 'SUCCESS'),
+        (STATUS_ERRORED, 'ERROR'),
+
+    card = models.ForeignKey(Card, verbose_name='Карточка')
+    upload_at = models.DateTimeField(verbose_name='Дата загрузки', default=timezone.now)
+    status = models.PositiveSmallIntegerField(verbose_name='Состояние загрузки', choices=STATUS_CHOICES)
+    description = models.TextField(verbose_name='Описание')
