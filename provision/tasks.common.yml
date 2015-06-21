@@ -13,14 +13,17 @@
 - name: Update repo
   apt: update_cache=yes
 # Install common required packages
-- name: Install curl
-  apt: name=curl state=latest
-- name: Install Git
-  apt: name=git-core state=latest
-- name: Install libjpeg-dev
-  apt: name=libjpeg-dev state=latest
-- name: Install libevent-dev
-  apt: name=libevent-dev state=latest
+- name: Install common packages
+  apt: >
+    name={{ item }} state=latest
+  with_items:
+    - curl
+    - git-core
+    - libjpeg-dev
+    - libevent-dev
+    - libxslt-dev
+    - libmysqlclient-dev
+    - redis-server
 # Install python
 - name: Check is python installed
   stat: path=/usr/local/bin/python3.4 get_md5=False

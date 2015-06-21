@@ -44,9 +44,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # additional apps
-
+    'geoposition',
     # insta apps
     'index',
+    'cards',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,8 +90,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
-MEDIA_URL = '/static/img/'
-MEDIA_ROOT = 'static/img/'
+MEDIA_URL = '/static/media/'
+MEDIA_ROOT = 'static/media/'
 
 TEMPLATE_DIRS = (join(BASE_DIR, 'insta', 'templates'), )
 
@@ -101,12 +102,37 @@ TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
 SERVER_EMAIL = 'notification@insta.com'
 ADMINS = (('Maks', 'samael500@gmail.com'), )
 
-# email settings
-DEFAULT_FROM_EMAIL = 'no-reply@insta.com'
-EMAIL_HOST = 'debugmail.io'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'samael500@gmail.com'
-EMAIL_HOST_PASSWORD = 'd6b2d120-0e94-11e5-9683-afa17037bc5a'
+# youtube api settings
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
+YOUTUBE_UPLOAD_SCOPE = 'https://www.googleapis.com/auth/youtube.upload'
+# secure connection settings
+YOUTUBE_REFRESH_TOKEN = '<secret>'
+YOUTUBE_CLIENT_ID = '<secret>'
+YOUTUBE_CLIENT_SECRET = '<secret>'
+# youtube video upload settings
+YOUTUBE_CHUNKSIZE = -1
+YOUTUBE_CATEGORY_ID = 19  # travel
+YOUTUBE_TITLE = 'I am discoverer {coord}'
+YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
+YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
+YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
+# additional youtube settings
+YOUTUBE_VIDEO_URL = 'http://youtu.be/{video_id}'
+
+# video validation settings
+VIDEO_MIME_TYPES = (
+    'application/ogg', 'video/quicktime', 'video/mp4', 'video/x-msvideo', 'video/mpeg', 'video/x-ms-wmv')
+VIDEO_EXT = ('.ogv', '.mov', '.mp4', '.avi', '.mpg', '.wmv')
+VIDEO_MAX_SIZE = 1024 * 1024 * 1024  # 1 Gb
+VIDEO_MIN_SIZE = 1024 * 1024 * 10    # 10 Mb
+
+# CELERY SETTINGS
+BROKER_URL = 'redis://localhost:6379/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ('pickle', 'json', )
+
 
 try:
     from settings_local import *  # noqa
