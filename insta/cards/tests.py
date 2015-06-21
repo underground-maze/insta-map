@@ -3,7 +3,6 @@ from io import BytesIO
 
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
-from django.test.client import RequestFactory
 from django.conf import settings
 
 from helpers.tests import InstaTransactionTestCase
