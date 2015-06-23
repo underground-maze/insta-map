@@ -24,6 +24,8 @@
     - libxslt-dev
     - libmysqlclient-dev
     - redis-server
+    - libgeos-dev
+    - python3-shapely
 # Install python
 - name: Check is python installed
   stat: path=/usr/local/bin/python3.4 get_md5=False
