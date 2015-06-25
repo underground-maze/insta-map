@@ -8,6 +8,7 @@
         </style>
 
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="https://googlemaps.github.io/js-marker-clusterer/src/markerclusterer_compiled.js" type="text/javascript"></script>
         {# include maps js #}
         <script type="text/javascript" src="{{ STATIC_URL }}/maps/polygon_path.js"></script>
         <script type="text/javascript">
@@ -25,9 +26,25 @@
                     };
                     // Add the circle for this city to the map.
                     cityCircle = new google.maps.Polygon(fog_of_war);
+
+                // add markers events
+                markers.forEach(
+                    function(marker){
+                        google.maps.event.addListener(marker, 'click', function() {
+                            var marker_info =
+                                'position: ' + marker.position + '\n' +
+                                'description: ' + marker.description + '\n' +
+                                'video: ' + marker.video;
+                            alert(marker_info);
+                        });
+                    }
+                );
+
+                var cluster = new MarkerClusterer(map, markers);
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
+
         </script>
     </head>
 

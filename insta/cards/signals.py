@@ -4,7 +4,7 @@ from django.utils.html import strip_tags
 from cards.models import Card
 from cards.tasks import upload_on_youtube_task
 
-from helpers.coordinates import get_map_js
+from helpers.coordinates import get_map_polygons, get_map_markers
 from helpers.service import write_js
 
 
@@ -25,11 +25,12 @@ def update_coord_js(sender, instance, **kwargs):
     """ Resave the fog of war map js """
     if not instance.is_new:
         # get coord of all active cards
-        points = [card.as_tuple() for card in Card.active.all()]
+        active = Card.active.all()
         # get js representation of card polygons
-        js_string = get_map_js(points)
+        polygons = get_map_polygons([card.as_tuple() for card in active])
+        markers = get_map_markers([card.as_dict() for card in active])
         # write the script into file
-        write_js(js_string)
+        write_js(polygons, markers)
 
 
 pre_save.connect(escape_tags, sender=Card)
