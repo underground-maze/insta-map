@@ -17,6 +17,12 @@ def upload_on_youtube(sender, instance, **kwargs):
         instance.youtube_id = 'uploading...'
         instance.save()
 
+def update_coord_js(sender, instance, **kwargs):
+    """ Resave the fog of war map js """
+    if not instance.is_new:
+        points = Card.active.all()
+
 
 pre_save.connect(escape_tags, sender=Card)
 post_save.connect(upload_on_youtube, sender=Card)
+post_save.connect(update_coord_js, sender=Card)
