@@ -72,8 +72,8 @@ def wrap_google(polygons):
     return result
 
 
-def get_map_js(points):
-    """ Create maps coords Js code """
+def get_map_polygons(points):
+    """ Create maps coords Js code for polygons """
     # get all of holes
     polygons = polygon_union(points)
     # get merkator and insert it into polygons
@@ -81,3 +81,12 @@ def get_map_js(points):
     # wrap all into js
     js_string = wrap_google(polygons)
     return js_string.rstrip(',')
+
+
+def get_map_markers(points):
+    """ Create maps coords Js code for markers """
+    point_str = 'new google.maps.Marker({position: new google.maps.LatLng(%s, %s), description: "%s", video: "%s"}),'
+    result = ''
+    for point in points:
+        result += point_str % (point['latitude'], point['longitude'], point['description'], point['video'])
+    return result
