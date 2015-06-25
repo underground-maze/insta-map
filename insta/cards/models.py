@@ -36,7 +36,7 @@ class Card(models.Model):
         verbose_name='Видеофайл', upload_to=video_path, blank=True, null=True, validators=[validate_video])
     youtube_id = models.CharField(verbose_name='ID видео на youtube', blank=True, null=True, max_length=32)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    radius = models.PositiveSmallIntegerField(verbose_name='Радиус (км)', default=10)
+    radius = models.PositiveSmallIntegerField(verbose_name='Радиус (км)', default=5)
 
     # additional fields
     created_at = models.DateTimeField(verbose_name='Дата добавления', default=timezone.now)
