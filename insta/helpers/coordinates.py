@@ -15,19 +15,19 @@ def geo_circle(latitude, longitude, radius):
     """ Create circle for planet parameters """
     earthsradius = 6371.0   # earths radius in km
     resolution = 77         # number of points in polygon
-    
-    # find the raidus in lat/lon 
+
+    # find the raidus in lat/lon
     radius_lat = degrees(radius / earthsradius)
-    radius_lng = radius_lat / cos(radians(latitude)) 
+    radius_lng = radius_lat / cos(radians(latitude))
 
     master, slave = [], []
 
     for index in range(resolution + 1):
         # circle angle
-        theta =  2. * pi / resolution * index
+        theta = 2. * pi / resolution * index
         # current point
-        ey = longitude + radius_lng * cos(theta)  # center a + radius x * cos(theta) 
-        ex = latitude + radius_lat * sin(theta)   # center b + radius y * sin(theta) 
+        ey = longitude + radius_lng * cos(theta)  # center a + radius x * cos(theta)
+        ex = latitude + radius_lat * sin(theta)   # center b + radius y * sin(theta)
         # insert point into polygon
         if -180 <= ey <= 180:
             master.append((ex, ey))

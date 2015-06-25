@@ -20,6 +20,7 @@ def upload_on_youtube(sender, instance, **kwargs):
         instance.youtube_id = 'uploading...'
         instance.save()
 
+
 def update_coord_js(sender, instance, **kwargs):
     """ Resave the fog of war map js """
     if not instance.is_new:
