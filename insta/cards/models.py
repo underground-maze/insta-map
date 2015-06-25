@@ -101,6 +101,16 @@ class Card(models.Model):
             ),
         )
 
+    def as_tuple(self):
+        """ Return position and radius as tuple """
+        return float(self.position.latitude), float(self.position.longitude), self.radius
+
+    def as_dict(self):
+        """ Return information of a card as a dict """
+        return dict(
+            latitude=self.position.latitude, longitude=self.position.longitude,
+            video=self.video_url, description=self.description, )
+
 
 class YoutubeLogger(models.Model):
 
