@@ -18,24 +18,44 @@ $(document).ready(function () {
         markers.forEach(
             function(marker){
                 google.maps.event.addListener(marker, 'click', function() {
-                    open_modal(marker);
+                    open_modal(marker.card_id);
                 });
             }
         );
 
         var cluster = new MarkerClusterer(map, markers);
+
+        // after map initialize try open modal
+        modal_from_get(map);
     };
 
-    function open_modal(marker){
+    function open_modal(card_id){
+        var card = cards[card_id];
+
         var $modal = $('.modal#card-info'),
             label = 'Я первооткрыватель {coord}';
-        // insert values
-        $modal.find('iframe').attr('src', marker.video);
-        $modal.find('div[name="description"]').text(marker.description);
-        $modal.find('#card-info-label').text(label.replace('{coord}', marker.position));
-        // open modal
+        $modal.find('iframe').attr('src', card.video);
+        $modal.find('div[name="description"]').text(card.description);
+        $modal.find('#card-info-label').text(label.replace('{coord}', card.latitude + ', ' + card.longitude));
         $('#open-modal').click();
+
+        return [card.latitude, card.longitude];
     };
+
+    function get(name){
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+    }
+
+    function modal_from_get(map){
+        // if url has get parametr `?card=<id>` open modal
+        var card = get('card');
+        if (card && cards[card]) {
+            var position = open_modal(card);
+            map.setZoom(17);
+            map.setCenter(new google.maps.LatLng(position[0], position[1]));
+        }
+    }
 
     init_map();
 });
