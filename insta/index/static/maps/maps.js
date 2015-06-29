@@ -29,9 +29,11 @@ $(document).ready(function () {
     function open_modal(marker){
         var $modal = $('.modal#card-info'),
             label = 'Я первооткрыватель {coord}';
+        // insert values
         $modal.find('iframe').attr('src', marker.video);
         $modal.find('div[name="description"]').text(marker.description);
         $modal.find('#card-info-label').text(label.replace('{coord}', marker.position));
+        // open modal
         $('#open-modal').click();
     };
 
