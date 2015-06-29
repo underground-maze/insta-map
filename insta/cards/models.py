@@ -1,5 +1,3 @@
-import json
-
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -114,8 +112,8 @@ class Card(models.Model):
     def as_dict(self):
         """ Return information of a card as a dict """
         return dict(
-            latitude=self.position.latitude, longitude=self.position.longitude,
-            video=self.embed_video_url, description=json.dumps(self.description), )
+            card_id=self.pk, latitude=str(self.position.latitude), longitude=str(self.position.longitude),
+            video=self.embed_video_url, description=self.description, )
 
 
 class YoutubeLogger(models.Model):

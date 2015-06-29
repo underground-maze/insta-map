@@ -85,8 +85,8 @@ def get_map_polygons(points):
 
 def get_map_markers(points):
     """ Create maps coords Js code for markers """
-    point_str = 'new google.maps.Marker({position: new google.maps.LatLng(%s, %s), description: "%s", video: "%s"}),'
+    point_str = 'new google.maps.Marker({position: new google.maps.LatLng(%s, %s), card_id: "%s"}),'
     result = ''
     for point in points:
-        result += point_str % (point['latitude'], point['longitude'], point['description'], point['video'])
+        result += point_str % (point['latitude'], point['longitude'], point['card_id'])
     return result

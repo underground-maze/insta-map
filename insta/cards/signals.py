@@ -1,3 +1,5 @@
+import json
+
 from django.db.models.signals import post_save, pre_save
 from django.utils.html import strip_tags
 
@@ -29,8 +31,9 @@ def update_coord_js(sender, instance, **kwargs):
         # get js representation of card polygons
         polygons = get_map_polygons([card.as_tuple() for card in active])
         markers = get_map_markers([card.as_dict() for card in active])
+        markers_data = json.dumps({card.pk: card.as_dict() for card in active})
         # write the script into file
-        write_js(polygons, markers)
+        write_js(polygons, markers, markers_data)
 
 
 pre_save.connect(escape_tags, sender=Card)

@@ -16,9 +16,10 @@ def video_path(instance, filename, directory='video'):
     return os.path.join(directory, hashed_name[:2], hashed_name[2:4], hashed_name + ext)
 
 
-def write_js(polygons, markers):
+def write_js(polygons, markers, cards_data):
     """ Create js file with map data """
     path = os.path.join(settings.STATIC_ROOT, 'maps', 'polygon_path.js')
-    content = 'var polygons = [{polygons}]; var markers = [{markers}];'.format(polygons=polygons, markers=markers)
+    content = 'var polygons=[{polygons}],markers=[{markers}],cards={cards};'.format(
+        polygons=polygons, markers=markers, cards=cards_data)
     with open(path, 'w') as js:
         js.write(content)
