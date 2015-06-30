@@ -32,3 +32,10 @@
   ignore_errors: True
 - include: tasks.python.yml
   when: not python_binary.stat.exists
+# Install Node.js and CoffeeScript
+- name: Add Node.js deb repo
+  shell: curl -sL https://deb.nodesource.com/setup | bash -
+- name: Install node.js
+  apt: name=nodejs state=latest update_cache=yes
+- name: Install Coffee-Script
+  npm: name=coffee-script global=yes version=latest
