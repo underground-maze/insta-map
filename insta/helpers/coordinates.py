@@ -50,10 +50,10 @@ def polygon_union(points):
     # merge polygons into union
     union = cascaded_union(polygons)
     coords = []
-    if union.geom_type != 'MultiPolygon':
+    if union.geom_type == 'Polygon':
         # if only one polygon result - return they coords
         coords.append(list(reversed(list(union.exterior.coords))))
-    else:
+    elif union.geom_type == 'MultiPolygon':
         # otherwise return multi coords for each polygon
         for polygon in union:
             coords.append(list(reversed(list(polygon.exterior.coords))))
