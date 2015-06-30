@@ -60,6 +60,9 @@ $(document).ready(function () {
         $modal.find('iframe').attr('src', card.video);
         $modal.find('div[name="description"]').text(card.description);
         $modal.find('#card-info-label').text(label.replace('{coord}', card.latitude + ', ' + card.longitude));
+        // change url
+        window.history.pushState('Я первооткрыватель', label, '?card={id}'.replace('{id}', card_id));
+        // open modal
         $('#open-modal').click();
 
         return [card.latitude, card.longitude];
