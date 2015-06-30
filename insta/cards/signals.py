@@ -23,6 +23,12 @@ def upload_on_youtube(sender, instance, **kwargs):
         instance.save()
 
 
+def delete_video(sender, instance, **kwargs):
+    """ Signal for delete permanent video file """
+    if not instance.is_new:
+        instance.video.delete(False)
+
+
 def update_coord_js(sender, instance, **kwargs):
     """ Resave the fog of war map js """
     if not instance.is_new:
@@ -39,3 +45,4 @@ def update_coord_js(sender, instance, **kwargs):
 pre_save.connect(escape_tags, sender=Card)
 post_save.connect(upload_on_youtube, sender=Card)
 post_save.connect(update_coord_js, sender=Card)
+pre_save.connect(delete_video, sender=Card)
