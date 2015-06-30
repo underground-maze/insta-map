@@ -27,6 +27,7 @@ $(document).ready(function () {
             streetViewControl: false,
         };
 
+        var bounds = new google.maps.LatLngBounds();
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
         var fog_of_war = {
@@ -40,6 +41,7 @@ $(document).ready(function () {
         // add markers events
         markers.forEach(
             function(marker){
+                bounds.extend(marker.position);
                 google.maps.event.addListener(marker, 'click', function() {
                     open_modal(marker.card_id);
                 });
@@ -47,6 +49,7 @@ $(document).ready(function () {
         );
 
         var cluster = new MarkerClusterer(map, markers);
+        map.fitBounds(bounds);
 
         // after map initialize try open modal
         modal_from_get(map);
@@ -78,8 +81,10 @@ $(document).ready(function () {
         var card = get('card');
         if (card && cards[card]) {
             var position = open_modal(card);
-            map.setZoom(17);
-            map.setCenter(new google.maps.LatLng(position[0], position[1]));
+            // cet map center to point
+            var bounds = new google.maps.LatLngBounds();
+            bounds.extend(new google.maps.LatLng(position[0], position[1]));
+            map.fitBounds(bounds);
         }
     }
 
