@@ -36,7 +36,7 @@ class Card(models.Model):
         verbose_name='Видеофайл', upload_to=video_path, blank=True, null=True, validators=[validate_video])
     youtube_id = models.CharField(verbose_name='ID видео на youtube', blank=True, null=True, max_length=32)
     description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    radius = models.PositiveSmallIntegerField(verbose_name='Радиус (км)', default=10)
+    radius = models.PositiveSmallIntegerField(verbose_name='Радиус (км)', default=5)
 
     # additional fields
     created_at = models.DateTimeField(verbose_name='Дата добавления', default=timezone.now)
@@ -72,6 +72,10 @@ class Card(models.Model):
     def video_url(self):
         return settings.YOUTUBE_VIDEO_URL.format(video_id=self.youtube_id) if self.youtube_id else None
 
+    @property
+    def embed_video_url(self):
+        return settings.YOUTUBE_VIDEO_EMBED_URL.format(video_id=self.youtube_id) if self.youtube_id else None
+
     def save(self, *args, **kwargs):
         # set date of check if change status from new - to other and if not checked already
         if not self.checked_at and not self.is_new:
@@ -100,6 +104,16 @@ class Card(models.Model):
                 ),
             ),
         )
+
+    def as_tuple(self):
+        """ Return position and radius as tuple """
+        return float(self.position.latitude), float(self.position.longitude), self.radius
+
+    def as_dict(self):
+        """ Return information of a card as a dict """
+        return dict(
+            card_id=self.pk, latitude=str(self.position.latitude), longitude=str(self.position.longitude),
+            video=self.embed_video_url, description=self.description, )
 
 
 class YoutubeLogger(models.Model):

@@ -119,6 +119,7 @@ YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
 YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
 # additional youtube settings
 YOUTUBE_VIDEO_URL = 'http://youtu.be/{video_id}'
+YOUTUBE_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/{video_id}'
 
 # video validation settings
 VIDEO_MIME_TYPES = (

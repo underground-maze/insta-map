@@ -1,20 +1,47 @@
 <!DOCTYPE html>
-
 <html>
-<head>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script type="text/javascript">
-        var myMap;
-        ymaps.ready(init);
-        function init () {myMap = new ymaps.Map('map', {center: [44.6, 33.5], zoom: 11}); }        
-    </script>
-    <style>
-        body, html {padding: 0; margin: 0; width: 100%; height: 100%;}
-        #map {width: 100%; height: 100%;}
-    </style>
-</head>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+            html, body, #map-canvas {height: 100%; margin: 0px; padding: 0px};
+            .modal.fade {height: 80%; width: 80%;};
+        </style>
 
-<body>
-<div id="map"></div>
-</body>
+        {# jquery #}
+        <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
+        {# include maps js #}
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
+        {# include bootstrap #}
+        <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
+        <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
+        {# youtube autoresize #}
+        <script src="https://cdn.rawgit.com/skipser/youtube-autoresize/master/youtube-autoresizer.js"></script>
+
+    </head>
+
+    <body>
+        <div id="map-canvas"></div>
+    </body>
+
+    <input id="open-modal" data-toggle="modal" data-target="#card-info" type="hidden" />
+
+    <!-- Modal -->
+    <div class="modal fade" id="card-info" tabindex="-1" role="dialog" aria-labelledby="card-info-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="card-info-label" />
+          </div>
+          <div class="modal-body">
+            <iframe width="1280" height="720" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+            <div name="description"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 </html>
