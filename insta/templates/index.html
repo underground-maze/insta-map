@@ -4,8 +4,7 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <style>
-            html, body, #map-canvas {height: 100%; margin: 0px; padding: 0px};
-            .modal.fade {height: 80%; width: 80%;};
+            div#map-canvas {height: 100vh};
         </style>
 
         {# jquery #}
@@ -24,6 +23,16 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">Я первооткрыватель</a>
+            </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><button type="button" class="btn btn-default navbar-btn">Добавить</button></li>
+                </ul>
+            </div>
+        </nav>
         <div id="map-canvas"></div>
     </body>
 

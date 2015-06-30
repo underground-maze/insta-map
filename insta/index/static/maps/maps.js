@@ -2,7 +2,30 @@ $(document).ready(function () {
 
     function init_map() {
         // Create the map.
-        var mapOptions = {zoom: 10, center: new google.maps.LatLng(44.654675, 33.771838)};
+        var mapOptions = {
+            zoom: 10,
+            center: new google.maps.LatLng(44.654675, 33.771838),
+
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                position: google.maps.ControlPosition.LEFT_CENTER
+            },
+
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.DEFAULT,
+                position: google.maps.ControlPosition.LEFT_CENTER
+            },
+
+            panControl: true,
+            panControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            },
+
+            scaleControl: true,
+            streetViewControl: false,
+        };
 
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
