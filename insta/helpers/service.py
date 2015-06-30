@@ -33,6 +33,7 @@ def render_to_file(template_name, context, file_name):
     """
     Render html to file put file in BASE_DIR/markup/*file_name*
     """
+    context.update(dict(STATIC_URL=settings.STATIC_URL))
     file_path = os.path.join(settings.BASE_DIR, 'markup', file_name)
     with open(file_path, 'w', encoding='UTF-8') as output:
         output.write(render_to_string(template_name, context))

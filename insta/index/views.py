@@ -26,16 +26,15 @@ class SiteUpdate(View):
     http_method_names = ('post', )
     template_name = 'index.html'
 
-    # @csrf_exempt
-    @staff_member_required
+    @csrf_exempt
+    @render_to_json
     def dispatch(self, request, *args, **kwargs):
+        if not request.is_ajax() or not request.user.is_staff:
+            return dict(result='errors'), 400
         return super().dispatch(request, *args, **kwargs)
 
-    @render_to_json
     def post(self, request, *args, **kwargs):
         """ Process post for update site """
-        if not request.is_ajax():
-            return dict(result='errors'), 400
         # update javascript
         active = Card.active.all()
         # get js representation of card polygons
