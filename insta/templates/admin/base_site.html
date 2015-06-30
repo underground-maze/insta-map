@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% load i18n grp_tags compress %}
+
+{% block title %}{{ title }} | Я первооткрыватель{% endblock %}
+
+{% block admin_title %}<h1 id="grp-admin-title">Я первооткрыватель</h1>{% endblock %}
+
+{% block extrahead %}
+{% compress js %}
+<script type="text/coffeescript">
+grp.jQuery(document).ready ->
+
+  $ = grp.jQuery
+  $link = $('#site_update')
+
+  $link.on 'click', ->
+    $.ajax
+      type: 'POST'
+      url: '{% url "site_update" %}'
+      success: (response) ->
+        alert('Обновление сайта успешно запущено, подождите пару минут пока будут применены изменения.')
+        return
+  return
+</script>
+{% endcompress %}
+{% endblock %}
+
+<!-- MESSAGES -->
+{% block messages %}
+    {% if messages %}
+        <ul class="grp-messagelist">
+            <!-- NOTE: no message|capfirst by purpose, because it does not work in some languages -->
+            {% for message in messages %}
+                <li{% if message.tags %} class="grp-{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block nav-global %}
+    <ul id="grp-user-tools">
+        <li class="grp-user-options-container"><a href="#" id='site_update'>Обновить главную страницу</a></li>
+    </ul>
+{% endblock %}
