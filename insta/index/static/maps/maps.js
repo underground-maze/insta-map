@@ -55,6 +55,43 @@ $(document).ready(function () {
         modal_from_get(map);
     };
 
+    function init_mini_map() {
+        // Create the map.
+        var position = new google.maps.LatLng(0, 0);
+        var mini_map_options = {
+            zoom: 3,
+            center: position,
+            mapTypeControl: true,
+            zoomControl: true,
+            panControl: true,
+            scaleControl: true,
+            streetViewControl: false,
+        };
+        var marker = new google.maps.Marker({
+            position: position,
+            draggable: true,
+        });
+
+
+        var mini_map = new google.maps.Map(document.getElementById('mini-map-canvas'), mini_map_options);
+
+        marker.setMap(mini_map);
+
+        google.maps.event.addListener(marker, 'dragend', function() {
+            $('#add-card').find('input[name="position"]').val(marker.position)
+        });
+
+        var circle = new google.maps.Circle({
+            center: position,
+            map: mini_map,
+            radius: 5000,
+            strokeColor: "#AAAAAA", strokeOpacity: 0.8, strokeWeight: 2,
+            fillColor: '#EEEEEE', fillOpacity: 0.3,
+        });
+        circle.bindTo('center', marker, 'position');
+
+    };
+
     function open_modal(card_id){
         var card = cards[card_id];
 
@@ -66,7 +103,7 @@ $(document).ready(function () {
         // change url
         window.history.pushState('Я первооткрыватель', label, '?card={id}'.replace('{id}', card_id));
         // open modal
-        $('#open-modal').click();
+        $('#card-info').modal('show');
 
         return [card.latitude, card.longitude];
     };
@@ -87,6 +124,14 @@ $(document).ready(function () {
             map.fitBounds(bounds);
         }
     }
+
+    $('#add-card-link').click(function(){
+        $('#add-card').modal('show');
+    });
+
+    $('#add-card').on('shown.bs.modal', function(){
+        init_mini_map();
+    });
 
     init_map();
 });

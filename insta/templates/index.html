@@ -4,7 +4,8 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <style>
-            div#map-canvas {height: 100vh};
+            div#map-canvas {height: 100vh}
+            div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
         </style>
 
         {# jquery #}
@@ -29,16 +30,14 @@
               <a class="navbar-brand" href="/">Я первооткрыватель</a>
             </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><button type="button" class="btn btn-default navbar-btn">Добавить</button></li>
+                    <li><a href="#" id="add-card-link">Совершить открытие</a></li>
                 </ul>
             </div>
         </nav>
         <div id="map-canvas"></div>
     </body>
 
-    <input id="open-modal" data-toggle="modal" data-target="#card-info" type="hidden" />
-
-    <!-- Modal -->
+    <!-- Modal card detail -->
     <div class="modal fade" id="card-info" tabindex="-1" role="dialog" aria-labelledby="card-info-label" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -48,7 +47,33 @@
           </div>
           <div class="modal-body">
             <iframe width="1280" height="720" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
-            <div name="description"></div>
+            <p><div name="description"></div></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal add card -->
+    <div class="modal fade" id="add-card" tabindex="-1" role="dialog" aria-labelledby="add-card-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h2 class="modal-title" id="add-card-label">Совершить открытие</h2>
+          </div>
+          <div class="modal-body">
+            <div id="mini-map-canvas"></div>
+            <hr />
+            <form>
+                <div class="input-group input-group-lg">
+                  <span class="input-group-addon">Координаты</span>
+                  <input type="text" class="form-control" disabled name="position">
+                </div>
+                <h4>Описание:</h4>
+                <textarea class="form-control" name="description" maxlength="1000" rows="5"></textarea>
+                <br />
+                <p><a class="btn btn-primary pull-right" role="button">Открытие!</a></p>
+                <br />
+            </form>
           </div>
         </div>
       </div>
