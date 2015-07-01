@@ -1,24 +1,34 @@
+{% load compress %}{% spaceless %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Я первооткрыватель!</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <style>
-            div#map-canvas {height: 100vh}
-            div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
-        </style>
 
-        {# jquery #}
-        <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
+        {% compress css %}
+          <style>
+              div#map-canvas {height: 100vh}
+              div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
+          </style>
+
+          <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
+        {% endcompress %}
+
         {# include maps js #}
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
-        {# include bootstrap #}
-        <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
-        <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+        {% compress js %}
+          {# jquery #}
+          <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
+          {# include maps js #}
+          <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
+          <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
+          <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
+          {# include bootstrap #}
+          <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
+        {% endcompress %}
+
         {# youtube autoresize #}
         <script src="https://cdn.rawgit.com/skipser/youtube-autoresize/master/youtube-autoresizer.js"></script>
 
@@ -31,7 +41,7 @@
               <a class="navbar-brand" href="/">Я первооткрыватель</a>
             </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" id="add-card-link">Совершить открытие</a></li>
+                    <li><button class="btn btn-link navbar-btn" id="add-card-link">Совершить открытие</button></li>
                 </ul>
             </div>
         </nav>
@@ -96,3 +106,4 @@
       </div>
     </div>
 </html>
+{% endspaceless %}
