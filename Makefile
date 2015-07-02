@@ -19,7 +19,6 @@ recompress:
 	python manage.py compress --force
 
 ci_test:
-	make recompress
 	python manage.py test insta -v 2
 	pep8 --exclude=*migrations*,*settings_local.py* --max-line-length=119 --show-source  insta/
 	pylama --skip=*migrations* -l pyflakes insta/
