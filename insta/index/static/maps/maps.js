@@ -5,6 +5,7 @@ $(document).ready(function () {
         var mapOptions = {
             zoom: 10,
             center: new google.maps.LatLng(44.654675, 33.771838),
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
 
             mapTypeControl: true,
             mapTypeControlOptions: {
