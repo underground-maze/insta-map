@@ -23,4 +23,4 @@ class IndexTestCase(TransactionTestCase):
 
     def test_index_url_resolve(self):
         """ Check is index correct url """
-        self.assertEqual(self.url, '/')
+        self.assertEqual(self.url, '/home')

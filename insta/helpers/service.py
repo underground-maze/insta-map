@@ -4,6 +4,7 @@ import uuid
 
 from django.conf import settings
 from django.utils import timezone
+from django.template.loader import render_to_string
 
 
 def video_path(instance, filename, directory='video'):
@@ -24,5 +25,15 @@ def write_js(polygons, markers, cards_data):
     path = os.path.join(path, 'polygon_path.js')
     content = 'var polygons=[{polygons}],markers=[{markers}],cards={cards};'.format(
         polygons=polygons, markers=markers, cards=cards_data)
-    with open(path, 'w') as js:
+    with open(path, 'w', encoding='UTF-8') as js:
         js.write(content)
+
+
+def render_to_file(template_name, context, file_name):
+    """
+    Render html to file put file in BASE_DIR/markup/*file_name*
+    """
+    context.update(dict(STATIC_URL=settings.STATIC_URL))
+    file_path = os.path.join(settings.BASE_DIR, 'markup', file_name)
+    with open(file_path, 'w', encoding='UTF-8') as output:
+        output.write(render_to_string(template_name, context))

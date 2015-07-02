@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # additional apps
     'geoposition',
+    'compressor',
     # insta apps
     'index',
     'cards',
@@ -88,12 +89,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static/'
+STATIC_ROOT = 'markup/static/'
 
 MEDIA_URL = '/static/media/'
-MEDIA_ROOT = 'static/media/'
+MEDIA_ROOT = 'markup/static/media/'
 
 TEMPLATE_DIRS = (join(BASE_DIR, 'insta', 'templates'), )
+
+# compressor settings
+COMPRESS_ROOT = join(BASE_DIR, STATIC_ROOT)
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+    ('text/x-scss', 'django_libsass.SassCompiler'), )
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = True
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder', )
 
 # rainbow tests
 TEST_RUNNER = 'rainbowtests.test.runner.RainbowDiscoverRunner'
