@@ -1,6 +1,5 @@
 import json
 
-from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, TemplateView
 
