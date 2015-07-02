@@ -61,5 +61,5 @@ target/
 settings_local.py
 venv/
 .vagrant/
-/static/
-/markup/
+/markup/static/
+/markup/index.html
