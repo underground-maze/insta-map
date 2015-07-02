@@ -97,7 +97,7 @@ $(document).ready(function () {
         var card = cards[card_id];
 
         var $modal = $('.modal#card-info'),
-            label = 'Я первооткрыватель {coord}';
+            label = 'Я &mdash; первооткрыватель {coord}';
         $modal.find('iframe').attr('src', card.video);
         $modal.find('div[name="description"]').text(card.description);
         $modal.find('#card-info-label').text(label.replace('{coord}', card.latitude + ', ' + card.longitude));
