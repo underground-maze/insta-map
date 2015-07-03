@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  connection: local
+  sudo: yes
+  remote_user: maks
+  vars:
+    # for all tasks
+    root_dir: /home/vagrant/proj
+    project_name: insta
+    locale: ru_RU
+    encoding: UTF-8
+  tasks:
+    # - include: tasks.common.yml
+    - include: tasks.postgresql.yml
+      vars:
+        postgres_password: eXKce0VV
+    - include: tasks.nginx.yml
+      vars:
+        http_host: # 10.1.1.123
+        http_port: 80
+    - include: tasks.app.yml
+      vars:
+        user_data: "'root', 'admin@example.com', '123123'"
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted
