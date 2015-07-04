@@ -23,7 +23,7 @@
   sudo: no
 - name: Start runserver
   shell: >
-    venv/bin/gunicorn --preload -D -b 0.0.0.0:8000 {{ project_name }}.wsgi:application
+    venv/bin/gunicorn --preload -D -b 0.0.0.0:8010 {{ project_name }}.wsgi:application
   args:
     chdir: "{{ root_dir }}"
   sudo: no

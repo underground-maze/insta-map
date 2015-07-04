@@ -1,5 +1,5 @@
 runserver:
-	venv/bin/python manage.py runserver 0.0.0.0:8000
+	venv/bin/python manage.py runserver 0.0.0.0:8010
 
 pep8:
 	venv/bin/pep8 --exclude=*migrations*,*settings_local.py* --max-line-length=119 --show-source  insta/
