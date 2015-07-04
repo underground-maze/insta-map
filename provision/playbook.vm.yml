@@ -1,12 +1,11 @@
 ---
 
-- hosts: all
-  connection: local
+- hosts: vm
   sudo: yes
   remote_user: maks
   vars:
     # for all tasks
-    root_dir: /home/maksim/insta-map
+    root_dir: /home/max/insta-map
     project_name: insta
     locale: ru_RU
     encoding: UTF-8
