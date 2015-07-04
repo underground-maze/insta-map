@@ -6,18 +6,18 @@
   remote_user: maks
   vars:
     # for all tasks
-    root_dir: /home/vagrant/proj
+    root_dir: /home/maksim/insta-map
     project_name: insta
     locale: ru_RU
     encoding: UTF-8
   tasks:
-    # - include: tasks.common.yml
+    - include: tasks.common.yml
     - include: tasks.postgresql.yml
       vars:
         postgres_password: eXKce0VV
     - include: tasks.nginx.yml
       vars:
-        http_host: # 10.1.1.123
+        http_host: revealer.ru
         http_port: 80
     - include: tasks.app.yml
       vars:
