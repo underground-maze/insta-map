@@ -52,8 +52,12 @@ class AddCardForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email', '').strip().lower()
         if email:
-            self.user, created = User.objects.get_or_create(email__iexact=email)
+            self.user, created = User.objects.get_or_create(email=email)
         return email
 
     def save(self, *args, **kwargs):
-        
+        """ Add user into created instace """
+        instance = super().save(commit=False)
+        instance.user = self.user
+        instance.save()
+        return instance

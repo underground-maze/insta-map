@@ -98,5 +98,6 @@ class AddCardFormTestCase(InstaTransactionTestCase):
         card = Card.objects.first()
         self.assertEqual(card.radius, 3)
         self.assertEqual(card.description, 'test description')
+        self.assertEqual(card.user.email, 'user@e.co')
         self.assertEqual(str(card.position.latitude), '44.61979915773973')
         self.assertEqual(str(card.position.longitude), '33.52958679199219')
