@@ -2,7 +2,6 @@ from django.core.context_processors import csrf
 from django.views.generic import FormView
 
 from helpers.decorators import render_to_json
-from cards.models import Card
 from cards.forms import AddCardForm
 
 

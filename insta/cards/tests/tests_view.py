@@ -2,7 +2,6 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from helpers.tests import InstaTransactionTestCase
-from cards.models import Card
 
 
 class AddCardViewTestCase(InstaTransactionTestCase):

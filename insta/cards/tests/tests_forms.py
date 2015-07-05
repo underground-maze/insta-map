@@ -1,7 +1,5 @@
 from decimal import Decimal
 
-from django.conf import settings
-
 from helpers.tests import InstaTransactionTestCase
 from cards.forms import AddCardForm
 from cards.models import Card
