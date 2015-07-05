@@ -45,7 +45,10 @@ class AddCardForm(forms.ModelForm):
         position = kwargs['data'].get('position', '')
         if position.strip():
             kwargs['data'].pop('position')
-            lat, lon = position.strip('()').split(', ')
+            try:
+                lat, lon = position.strip('()').split(', ')
+            except:
+                raise ValidationError(self.required_msg)
             kwargs['data'].update(dict(position_0=lat, position_1=lon))
         return kwargs
 

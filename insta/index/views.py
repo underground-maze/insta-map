@@ -29,7 +29,7 @@ class SiteUpdate(View):
     @render_to_json
     def dispatch(self, request, *args, **kwargs):
         if not request.is_ajax() or not request.user.is_staff:
-            return dict(result='errors'), 400
+            return dict(message='Forbidden'), 403
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

@@ -1,4 +1,5 @@
 import http
+import json
 import os
 from io import BytesIO
 
@@ -33,3 +34,7 @@ class InstaTransactionTestCase(TransactionTestCase):
         data_io.name = 'video' + file_format
         data_io.seek(0)
         return data_io
+
+    def json_response(self, response, status_code):
+        self.assertEqual(response.status_code, status_code)
+        return json.loads(response.content.decode('utf-8'))
