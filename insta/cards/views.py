@@ -1,8 +1,9 @@
 from django.core.context_processors import csrf
 from django.views.generic import FormView
 
-from cards.models import Card
 from helpers.decorators import render_to_json
+from cards.models import Card
+from cards.forms import AddCardForm
 
 
 class AddCardView(FormView):
@@ -10,6 +11,7 @@ class AddCardView(FormView):
     """ Add new card api view """
 
     http_method_names = ('get', 'post', )
+    form_class = AddCardForm
 
     @render_to_json
     def dispatch(self, request, *args, **kwargs):
