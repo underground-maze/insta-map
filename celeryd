@@ -1,0 +1,20 @@
+# put file in
+# /etc/default/celeryd
+
+CELERY_APP="insta"
+
+CELERYD_CHDIR="/home/max/insta-map"
+
+DJANGO_SETTINGS_MODULE="insta.settings"
+
+CELERY_BIN="/home/max/insta-map/venv/bin/celery"
+
+CELERYD_NODES="insta_worker1"
+
+CELERYD_LOG_FILE="/home/max/var/log/celery/%N.log"
+
+CELERYD_PID_FILE="/home/max/var/run/celery/%N.pid"
+
+CELERY_CREATE_DIRS=1
+
+CELERYD_USER="maks"
