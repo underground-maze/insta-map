@@ -69,12 +69,56 @@ class AddCardViewTestCase(InstaTransactionTestCase):
         data = dict(position='                          ')
         response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
         self.assertEqual(response['errors']['position'], ['Обязательное поле.'])
-        # check is very long field value
-        data = dict(position='a' * 1001)
-        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
-        self.assertEqual(response['errors']['position'], [
-            'Убедитесь, что это значение содержит не более 1000 символов (сейчас 1001).'])
         # check correct
         data = dict(position='(44.61979915773973, 33.52958679199219)')
         response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
         self.assertNotIn('position', response['errors'])
+
+    def test_add_card_form_validation_email(self):
+        """ Check form validation for field 'email' """
+        # check is required field not provided
+        data = dict()
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
+        # check is required field empty value
+        data = dict(email='                          ')
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
+        # check is very long field value
+        data = dict(email=('a' * 1001) + '@e.co')
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['email'], [
+            'Убедитесь, что это значение содержит не более 200 символов (сейчас 1006).'])
+        # check invalide email
+        data = dict(email='not_email@dddd')
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['email'], ['Введите корректный адрес электронной почты.'])
+        # check correct
+        data = dict(email='user@e.co')
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertNotIn('email', response['errors'])
+
+    def test_add_card_form_validation_video(self):
+        """ Check form validation for field 'video' """
+        settings.VIDEO_MIN_SIZE = 1
+        settings.VIDEO_MAX_SIZE = 5
+        # check is required field not provided
+        data = dict()
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['video'], ['Обязательное поле.'])
+        # check is very big file
+        data = dict(video=self.create_stream('.mov', settings.VIDEO_MAX_SIZE))
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['video'], ['Недопустимый размер файла.'])
+        # check is very small file
+        data = dict(video=self.create_stream('.mov', settings.VIDEO_MIN_SIZE))
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['video'], ['Недопустимый размер файла.'])
+        # check is incorrect video file
+        data = dict(video=self.create_stream('.cow', 3))
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertEqual(response['errors']['video'], ['Неверный формат видео.'])
+        # check correct
+        data = dict(video=self.create_stream('.mov', 3))
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        self.assertNotIn('video', response['errors'])

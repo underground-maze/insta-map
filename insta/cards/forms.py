@@ -23,7 +23,7 @@ class AddCardForm(forms.ModelForm):
         kwargs = self.prepare_post_data(kwargs)
         super().__init__(*args, **kwargs)
         self.fields['radius'].required = False
-        # self.fields['video'].required = True
+        self.fields['video'].required = True
         self.fields['description'].validators = [MaxLengthValidator(1000)]
 
     def _blank_spaces_less(self, value):
@@ -47,8 +47,8 @@ class AddCardForm(forms.ModelForm):
             kwargs['data'].pop('position')
             try:
                 lat, lon = position.strip('()').split(', ')
-            except:
-                raise ValidationError(self.required_msg)
+            except ValueError:
+                lat = lon = '0'
             kwargs['data'].update(dict(position_0=lat, position_1=lon))
         return kwargs
 

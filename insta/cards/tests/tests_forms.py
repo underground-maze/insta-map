@@ -1,8 +1,8 @@
 from decimal import Decimal
 
-from helpers.tests import InstaTransactionTestCase
 from django.conf import settings
 
+from helpers.tests import InstaTransactionTestCase
 from cards.forms import AddCardForm
 from cards.models import Card
 
@@ -70,24 +70,11 @@ class AddCardFormTestCase(InstaTransactionTestCase):
         form = self.get_form(dict(email='user@e.co'))
         self.assertNotIn('email', form.errors)
 
-    '''
-    def test_video_field(self):
-        """ Check correct validation for video field """
-        settings.VIDEO_MIN_SIZE = 1
-        settings.VIDEO_MAX_SIZE = 5
-        # check is required field not provided
-        form = self.get_form(dict())
-        self.assertEqual(form.errors['video'], ['Обязательное поле.'])
-        # check is max size over
-        form = self.get_form(dict(video='a'))#self.create_stream('.mov', settings.VIDEO_MAX_SIZE)))
-        self.assertEqual(form.errors['video'], ['Обязательное поле.'])
-        assert False
-    '''
-
     def test_form_save_correct(self):
         """ Check is correct create new instance of card """
         form = self.get_form(dict(
             position='(44.61979915773973, 33.52958679199219)', description='test description', email='user@e.co'))
+        form.fields['video'].required = False
         self.assertTrue(form.is_valid())
         # check is no card created
         self.assertEqual(Card.objects.all().count(), 0)
