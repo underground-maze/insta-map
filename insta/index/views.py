@@ -7,7 +7,7 @@ from cards.models import Card
 
 from helpers.coordinates import get_map_polygons, get_map_markers
 from helpers.service import render_to_file, write_js
-from helpers.decorators import render_to_json
+from helpers.decorators import render_to_json, ajax
 
 
 class IndexView(TemplateView):
@@ -27,8 +27,9 @@ class SiteUpdate(View):
 
     @csrf_exempt
     @render_to_json
+    @ajax
     def dispatch(self, request, *args, **kwargs):
-        if not request.is_ajax() or not request.user.is_staff:
+        if not request.user.is_staff:
             return dict(result='errors'), 400
         return super().dispatch(request, *args, **kwargs)
 
