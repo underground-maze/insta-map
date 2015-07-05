@@ -1,6 +1,3 @@
-import os
-from io import BytesIO
-
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.conf import settings
@@ -105,16 +102,6 @@ class TestCardModels(InstaTransactionTestCase):
         # check counts
         self.assertEquals(self.model.objects.count(), 1)
         self.assertEquals(self.model.active.count(), 0)
-
-    def create_stream(self, file_format, size):
-        """ Create temporary stream """
-        data = b'*' * size
-        data_io = BytesIO(data)
-        data_io.seek(0, os.SEEK_END)
-        data_io.size = data_io.tell()
-        data_io.name = 'video' + file_format
-        data_io.seek(0)
-        return data_io
 
     def test_video_validate(self):
         """ Check is correct validation video """
