@@ -29,6 +29,8 @@
           <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
         {% endcompress %}
 
+        <script type="text/javascript" src="{{ STATIC_URL }}add_card.js"></script>
+
         {# youtube autoresize #}
         <script src="https://cdn.rawgit.com/skipser/youtube-autoresize/master/youtube-autoresizer.js"></script>
 
@@ -74,9 +76,9 @@
           <div class="modal-body">
             <div id="mini-map-canvas"></div>
             <hr />
-            <form>
+            <form id="add-card-form" action="{% url 'card:add' %}" method="POST">
                 <input type="hidden" readonly name="position">
-                {# <input type="hidden" readonly name="csrf_token"> #}
+                <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
 
                 <div class="form-group">
                     <label for="email">Контактная информация:</label>
