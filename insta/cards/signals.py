@@ -7,7 +7,7 @@ from cards.models import Card
 from cards.tasks import upload_on_youtube_task
 
 from helpers.coordinates import get_map_polygons, get_map_markers
-from helpers.service import write_js
+from helpers.service import write_js, render_to_file
 
 
 def escape_tags(sender, instance, **kwargs):
@@ -40,6 +40,7 @@ def update_coord_js(sender, instance, **kwargs):
         markers_data = json.dumps({card.pk: card.as_dict() for card in active})
         # write the script into file
         write_js(polygons, markers, markers_data)
+        render_to_file('index.html', {}, 'index.html')
 
 
 pre_save.connect(escape_tags, sender=Card)
