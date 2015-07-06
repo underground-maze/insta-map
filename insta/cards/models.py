@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.conf import settings
 
 from geoposition.fields import GeopositionField
 
+from accounts.models import InstaUser
 from helpers.service import video_path
 from helpers.validators import validate_video
 
@@ -30,7 +30,7 @@ class Card(models.Model):
         (STATUS_ACCEPTED, 'Принято'),
         (STATUS_REJECTED, 'Отклонено'), )
 
-    user = models.ForeignKey(User, verbose_name='Автор')
+    user = models.ForeignKey(InstaUser, verbose_name='Автор')
     position = GeopositionField(verbose_name='Координаты')
     video = models.FileField(
         verbose_name='Видеофайл', upload_to=video_path, blank=True, null=True, validators=[validate_video])

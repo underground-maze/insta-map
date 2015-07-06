@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 
 from cards.models import Card
-from django.contrib.auth.models import User
+from accounts.models import InstaUser
 
 
 class AddCardForm(forms.ModelForm):
@@ -58,7 +58,7 @@ class AddCardForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email', '').strip().lower()
         if email:
-            self.user, created = User.objects.get_or_create(email=email)
+            self.user, created = InstaUser.objects.get_or_create(email=email)
         return email
 
     def save(self, *args, **kwargs):
