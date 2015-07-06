@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
@@ -44,6 +46,7 @@ class AddCardForm(forms.ModelForm):
         """ Get latitude and longitude from request data """
         position = kwargs['data'].get('position', '')
         if position.strip():
+            kwargs = deepcopy(kwargs)
             kwargs['data'].pop('position')
             try:
                 lat, lon = position.strip('()').split(', ')
