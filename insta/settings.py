@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'geoposition',
     'compressor',
     # insta apps
+    'accounts',
     'index',
     'cards',
 )
