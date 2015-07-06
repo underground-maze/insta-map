@@ -1,13 +1,15 @@
 $(document).ready(function () {
 
     var $form = $('#add-card-form'),
+        $progress = $('div.progress-bar'),
         fields = ['position', 'email', 'description', 'video'],
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
         required_error = 'Обязательное поле.',
         VIDEO_MAX_SIZE = 1024 * 1024 * 1024
-        VIDEO_MIN_SIZE = 1024 * 1024 * 10;
+        VIDEO_MIN_SIZE = 1024 * 1024 * 10,
+        video_size = 0;
 
     function get_csrf_token(){
         // get csrf_token from backend use ajax
@@ -91,7 +93,8 @@ $(document).ready(function () {
             errors['video'] = [required_error];
         } else {
             var file = value[0];
-            if ((file.size > VIDEO_MAX_SIZE) || (file.size < VIDEO_MIN_SIZE)) {
+            video_size = file.size;
+            if ((video_size > VIDEO_MAX_SIZE) || (video_size < VIDEO_MIN_SIZE)) {
                 errors['video'] = ['Недопустимый размер файла. (min 10 mb, max 1 Gb)'];
             }
             if (file.type.indexOf('video') == -1) {
@@ -103,6 +106,14 @@ $(document).ready(function () {
         insert_errors(errors);
         return is_valid;
     };
+
+    function progress_handling_function(e){
+        if(e.lengthComputable){
+            var percent = e.loaded / e.total * 100;
+            $progress.attr('aria-valuenow', e.loaded);
+            $progress.attr('style', 'width: {pc}%'.replace('{pc}', percent));
+        }
+    }
 
     $form.on('submit', function(){
         clear_errors();
@@ -120,8 +131,24 @@ $(document).ready(function () {
             cache: false,
             contentType: false,
             processData: false,
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress', progress_handling_function, false);
+                }
+                return myXhr;
+            },
             success: function(response) {
-                console.log(response);
+                $parent = $form.parent()
+                $parent.empty();
+                $parent.html(''
+                    + '<div class="alert alert-info">'
+                    +     '<p>'
+                    +         '<strong>Поздравляем</strong>, ваше открытие принято. '
+                    +         'После подтверждения модератором оно будет опубликовано! '
+                    +         '<strong>Спасибо</strong>, что исследуете мир вместе с нами.'
+                    +     '</p>'
+                    + '</div>');
             },
             error: function(response) {
                 var data = response.responseJSON;
@@ -129,6 +156,16 @@ $(document).ready(function () {
                 if (data.result === 'errors') {
                     insert_errors(data.errors);
                 }
+            },
+            beforeSend: function(){
+                $form.find('button[type="submit"]').attr('disabled', true);
+                // update progress bar
+                $progress.attr('aria-valuenow', 0);
+                $progress.attr('aria-valuemax', video_size);
+                $progress.attr('style', 'width: 0%');
+            },
+            complete: function(){
+                $form.find('button[type="submit"]').attr('disabled', false);
             }
         });
 

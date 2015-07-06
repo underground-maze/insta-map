@@ -26,7 +26,7 @@ class AddCardView(FormView):
         return dict(result='errors', errors=form.errors), 400
 
     def form_valid(self, form):
-        # self.object = form.save()
+        self.object = form.save()
         return dict(result='success'), 200
 
 
