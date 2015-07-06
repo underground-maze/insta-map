@@ -46,7 +46,7 @@ class AddCardForm(forms.ModelForm):
         """ Get latitude and longitude from request data """
         position = kwargs['data'].get('position', '')
         if position.strip():
-            kwargs = deepcopy(kwargs)
+            kwargs['data'] = deepcopy(kwargs['data'])
             kwargs['data'].pop('position')
             try:
                 lat, lon = position.strip('()').split(', ')
