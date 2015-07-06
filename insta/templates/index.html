@@ -77,7 +77,9 @@
             <div id="mini-map-canvas"></div>
             <hr />
             <form id="add-card-form" action="{% url 'card:add' %}" method="POST" enctype="multipart/form-data">
-                <input type="hidden" readonly name="position">
+                <div class="form-group">
+                  <input type="hidden" readonly name="position" id="position">
+                </div>
                 <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
 
                 <div class="form-group">
@@ -92,8 +94,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="video_file">Видео</label>
-                    <input type="file" accept="video/*" id="video_file" name="video">
+                    <label for="video">Видео</label>
+                    <input type="file" accept="video/*" id="video" name="video">
                     <p class="help-block">Загрузите видео вашего открытия, и незабудьте в конце сказать "Я &mdash; первооткрыватель!".</p>
                 </div>
 

@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    $form = $('#add-card-form');
+    var $form = $('#add-card-form'),
+        fields = ['position', 'email', 'description', 'video'],
+        error_class = 'has-error';
 
     function get_csrf_token(){
         // get csrf_token from backend use ajax
@@ -34,11 +36,18 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             success: function(response) {
+                alert(0);
                 console.log(response);
             },
             error: function(response) {
-                console.log(response);
-                console.log(arguments);
+                alert(1);
+                if (response.status === 'errors') {
+                    fields.forEach(function(index, value) {
+                        if (response.errors[value]){
+                            $form.find('#' + value).addClass(error_class);
+                        }
+                    });
+                }
             }
         });
 

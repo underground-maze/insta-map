@@ -23,11 +23,11 @@ class AddCardView(FormView):
         return dict(csrf_token=str(csrf(request)['csrf_token'])), 200
 
     def form_invalid(self, form):
-        return dict(status='errors', errors=form.errors), 400
+        return dict(result='errors', errors=form.errors), 400
 
     def form_valid(self, form):
-        self.object = form.save()
-        return dict(status='success'), 200
+        # self.object = form.save()
+        return dict(result='success'), 200
 
 
 add_card_view = AddCardView.as_view()
