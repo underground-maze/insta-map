@@ -7,7 +7,7 @@ $(document).ready(function () {
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
         required_error = 'Обязательное поле.',
-        VIDEO_MAX_SIZE = 1024 * 1024 * 1024
+        VIDEO_MAX_SIZE = 1024 * 1024 * 1024,
         VIDEO_MIN_SIZE = 1024 * 1024 * 10,
         video_size = 0;
 
