@@ -16,8 +16,8 @@
     - compress --force
 - name: Create user
   shell: >
-    echo "from django.contrib.auth.models import User;
-    User.objects.create_superuser({{ user_data }})" | venv/bin/python manage.py shell
+    echo "from accounts.models import InstaUser;
+    InstaUser.objects.create_superuser({{ user_data }})" | venv/bin/python manage.py shell
   args:
     chdir: "{{ root_dir }}"
   sudo: no

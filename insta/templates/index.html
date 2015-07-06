@@ -27,6 +27,8 @@
           <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
           {# include bootstrap #}
           <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
+          {# include add card script #}
+          <script type="text/javascript" src="{{ STATIC_URL }}add_card.js"></script>
         {% endcompress %}
 
         {# youtube autoresize #}
@@ -73,26 +75,38 @@
           </div>
           <div class="modal-body">
             <div id="mini-map-canvas"></div>
-            <hr />
-            <form>
-                <input type="hidden" readonly name="position">
-                {# <input type="hidden" readonly name="csrf_token"> #}
+            <form id="add-card-form" action="{% url 'card:add' %}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="hidden" readonly name="position" id="position">
+                    <ul id="errors-position" />
+                </div>
+                <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
+
+                <hr />
 
                 <div class="form-group">
                     <label for="email">Контактная информация:</label>
-                    <input id="email" type="text" class="form-control" name="email" placeholder="fernando@magallanes.pt">
+                    <input id="email" type="text" class="form-control" name="email" maxlength="200" placeholder="fernando@magallanes.pt">
+                    <ul id="errors-email" />
                 </div>
 
                 <div class="form-group">
                     <label for="description">Описание открытия:</label>
                     <textarea id="description" class="form-control" name="description" maxlength="1000" rows="5"></textarea>
-                    <p class="help-block">Кратко поведайте миру о своем открытии.</p>
+                    <p>Кратко поведайте миру о своем открытии.</p>
+                    <ul id="errors-description" />
                 </div>
 
                 <div class="form-group">
-                    <label for="video_file">Видео</label>
-                    <input type="file" accept="video/*" id="video_file">
-                    <p class="help-block">Загрузите видео вашего открытия, и незабудьте в конце сказать "Я &mdash; первооткрыватель!".</p>
+                    <label for="video">Видео</label>
+                    <input type="file" accept="video/*" id="video" name="video">
+                    <p>Загрузите видео вашего открытия, и незабудьте в конце сказать "Я &mdash; первооткрыватель!".</p>
+                    <ul id="errors-video" />
+                </div>
+
+                <div class="progress progress-striped active">
+                    <div class="progress-bar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    </div>
                 </div>
 
                 <hr />
