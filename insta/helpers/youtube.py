@@ -3,6 +3,7 @@ import json
 import time
 import traceback
 
+import socks
 import http
 import httplib2
 
@@ -60,13 +61,11 @@ def get_authenticated_service():
     credentials = AccessTokenCredentials(access_token=get_auth_code(), user_agent='insta-python/1.0')
     # create httplib proxy connection
     if settings.USE_PROXY:
-        SOCKS5 = 2
-        http_proxy = httplib2.Http(proxy_info=httplib2.ProxyInfo(SOCKS5, 'localhost', 1080))
-    else:
-        http_proxy = httplib2.Http()
+        socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, 'localhost', 1080)
+        socks.wrapmodule(httplib2)
     # create connection to youtube api
     return build(
-        settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION, http=credentials.authorize(http_proxy))
+        settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION, http=credentials.authorize(httplib2.Http()))
 
 
 def initialize_upload(youtube, card):
