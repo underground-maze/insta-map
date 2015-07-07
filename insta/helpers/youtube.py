@@ -58,9 +58,15 @@ def get_authenticated_service():
     """ Create youtube oauth2 connection """
     # make credentials with refresh_token auth
     credentials = AccessTokenCredentials(access_token=get_auth_code(), user_agent='insta-python/1.0')
+    # create httplib proxy connection
+    if settings.USE_PROXY:
+        SOCKS5 = 2
+        http_proxy = httplib2.Http(proxy_info=httplib2.ProxyInfo(SOCKS5, 'localhost', 1080))
+    else:
+        http_proxy = httplib2.Http()
     # create connection to youtube api
     return build(
-        settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION, http=credentials.authorize(httplib2.Http()))
+        settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION, http=credentials.authorize(http_proxy))
 
 
 def initialize_upload(youtube, card):

@@ -150,6 +150,7 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ('pickle', 'json', )
 
+USE_PROXY = False
 
 try:
     from settings_local import *  # noqa
