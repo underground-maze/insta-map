@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     function init_mini_map() {
         // Create the map.
-        var position = new google.maps.LatLng(0, 0);
+        var position = new google.maps.LatLng(43.296944, 34.029444);
         var mini_map_options = {
             zoom: 3,
             center: position,
