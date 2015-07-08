@@ -4,7 +4,7 @@ $(document).ready(function () {
         // Create the map.
         var mapOptions = {
             zoom: 10,
-            center: new google.maps.LatLng(44.654675, 33.771838),
+            center: new google.maps.LatLng(43.296944, 34.029444),
             mapTypeId: google.maps.MapTypeId.SATELLITE,
 
             mapTypeControl: true,
@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     function init_mini_map() {
         // Create the map.
-        var position = new google.maps.LatLng(0, 0);
+        var position = new google.maps.LatLng(43.296944, 34.029444);
         var mini_map_options = {
             zoom: 3,
             center: position,
