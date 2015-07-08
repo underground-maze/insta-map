@@ -111,7 +111,7 @@ def resumable_upload(insert_request):
 
 def upload_video(card):
     try:
-        if USE_PROXY:
+        if settings.USE_PROXY:
             # init ssh tunnel connection
             subprocess.Popen(['ssh', '-fN', '-D', '1080', 'forward@wbmonster'])
             # wait some time while connection established
@@ -134,7 +134,7 @@ def upload_video(card):
         kwargs = dict(card=card, status=YoutubeLogger.STATUS_SUCCESS, description=card.video_url)
     finally:
         YoutubeLogger.objects.create(**kwargs)
-        if USE_PROXY:
+        if settings.USE_PROXY:
             # desctroy ssh tunnel connection
             subprocess.Popen(['pkill', '-f', 'forward@wbmonster'])
             # wait some time while connection will closed
