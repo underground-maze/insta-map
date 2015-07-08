@@ -1,8 +1,9 @@
-# edited version for python3
-# need to place in lib/python.../site-packages
+
 """SocksiPy - Python SOCKS module.
 Version 1.00
+
 Copyright 2006 Dan-Haim. All rights reserved.
+
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 1. Redistributions of source code must retain the above copyright notice, this
@@ -13,6 +14,7 @@ are permitted provided that the following conditions are met:
 3. Neither the name of Dan Haim nor the names of his contributors may be used
    to endorse or promote products derived from this software without specific
    prior written permission.
+   
 THIS SOFTWARE IS PROVIDED BY DAN HAIM "AS IS" AND ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
@@ -22,29 +24,32 @@ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA
 OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMANGE.
+
+
 This module provides a standard socket-like interface for Python
 for tunneling connections through SOCKS proxies.
+
 """
 
 """
+
 Minor modifications made by Christopher Gilbert (http://motomastyle.com/)
 for use in PyLoris (http://pyloris.sourceforge.net/)
+
 Minor modifications made by Mario Vilas (http://breakingcode.wordpress.com/)
 mainly to merge bug fixes found in Sourceforge
+
+Minor modifications made by Eugene Dementiev (http://www.dementiev.eu/)
+
 """
 
-import base64
 import socket
 import struct
 import sys
 
-if getattr(socket, 'socket', None) is None:
-    raise ImportError('socket.socket missing, proxy support unusable')
-
 PROXY_TYPE_SOCKS4 = 1
 PROXY_TYPE_SOCKS5 = 2
 PROXY_TYPE_HTTP = 3
-PROXY_TYPE_HTTP_NO_TUNNEL = 4
 
 _defaultproxy = None
 _orgsocket = socket.socket
@@ -121,7 +126,6 @@ class socksocket(socket.socket):
             self.__proxy = (None, None, None, None, None, None)
         self.__proxysockname = None
         self.__proxypeername = None
-        self.__httptunnel = True
 
     def __recvall(self, count):
         """__recvall(count) -> data
@@ -134,41 +138,6 @@ class socksocket(socket.socket):
             if not d: raise GeneralProxyError((0, "connection closed unexpectedly"))
             data = data + d
         return data
-
-    def sendall(self, content, *args):
-        """ override socket.socket.sendall method to rewrite the header
-        for non-tunneling proxies if needed
-        """
-        if not self.__httptunnel:
-            content = self.__rewriteproxy(content)
-        return super(socksocket, self).sendall(content, *args)
-
-    def __rewriteproxy(self, header):
-        """ rewrite HTTP request headers to support non-tunneling proxies
-        (i.e. those which do not support the CONNECT method).
-        This only works for HTTP (not HTTPS) since HTTPS requires tunneling.
-        """
-        host, endpt = None, None
-        hdrs = header.split("\r\n")
-        for hdr in hdrs:
-            if hdr.lower().startswith("host:"):
-                host = hdr
-            elif hdr.lower().startswith("get") or hdr.lower().startswith("post"):
-                endpt = hdr
-        if host and endpt:
-            hdrs.remove(host)
-            hdrs.remove(endpt)
-            host = host.split(" ")[1]
-            endpt = endpt.split(" ")
-            if (self.__proxy[4] != None and self.__proxy[5] != None):
-                hdrs.insert(0, self.__getauthheader())
-            hdrs.insert(0, "Host: %s" % host)
-            hdrs.insert(0, "%s http://%s%s %s" % (endpt[0], host, endpt[1], endpt[2]))
-        return "\r\n".join(hdrs)
-
-    def __getauthheader(self):
-        auth = self.__proxy[4] + ":" + self.__proxy[5]
-        return "Proxy-Authorization: Basic " + base64.b64encode(auth)
 
     def setproxy(self, proxytype=None, addr=None, port=None, rdns=True, username=None, password=None):
         """setproxy(proxytype, addr[, port[, rdns[, username[, password]]]])
@@ -246,7 +215,11 @@ class socksocket(socket.socket):
             if self.__proxy[3]:
                 # Resolve remotely
                 ipaddr = None
-                req = req + chr(0x03).encode() + chr(len(destaddr)).encode() + destaddr
+                if type(destaddr) != type(b''): # python3
+                    destaddr_bytes = destaddr.encode(encoding='idna')
+                else:
+                    destaddr_bytes = destaddr
+                req = req + chr(0x03).encode() + chr(len(destaddr_bytes)).encode() + destaddr_bytes
             else:
                 # Resolve locally
                 ipaddr = socket.inet_aton(socket.gethostbyname(destaddr))
@@ -357,16 +330,14 @@ class socksocket(socket.socket):
             addr = socket.gethostbyname(destaddr)
         else:
             addr = destaddr
-        headers =  ["CONNECT ", addr, ":", str(destport), " HTTP/1.1\r\n"]
-        headers += ["Host: ", destaddr, "\r\n"]
-        if (self.__proxy[4] != None and self.__proxy[5] != None):
-                headers += [self.__getauthheader(), "\r\n"]
-        headers.append("\r\n")
-        self.sendall("".join(headers).encode())
+        self.sendall(("CONNECT " + addr + ":" + str(destport) + " HTTP/1.1\r\n" + "Host: " + destaddr + "\r\n\r\n").encode())
         # We read the response until we get the string "\r\n\r\n"
         resp = self.recv(1)
         while resp.find("\r\n\r\n".encode()) == -1:
-            resp = resp + self.recv(1)
+            recv = self.recv(1)
+            if not recv:
+                raise GeneralProxyError((1, _generalerrors[1]))
+            resp = resp + recv
         # We just need the first line to check if the connection
         # was successful
         statusline = resp.splitlines()[0].split(" ".encode(), 2)
@@ -392,7 +363,7 @@ class socksocket(socket.socket):
         To select the proxy server use setproxy().
         """
         # Do a minimal input check first
-        if (not type(destpair) in (list,tuple)) or (len(destpair) < 2) or (not isinstance(destpair[0], str)) or (type(destpair[1]) != int):
+        if (not type(destpair) in (list,tuple)) or (len(destpair) < 2) or (type(destpair[0]) != type('')) or (type(destpair[1]) != int):
             raise GeneralProxyError((5, _generalerrors[5]))
         if self.__proxy[0] == PROXY_TYPE_SOCKS5:
             if self.__proxy[2] != None:
@@ -415,16 +386,6 @@ class socksocket(socket.socket):
                 portnum = 8080
             _orgsocket.connect(self,(self.__proxy[1], portnum))
             self.__negotiatehttp(destpair[0], destpair[1])
-        elif self.__proxy[0] == PROXY_TYPE_HTTP_NO_TUNNEL:
-            if self.__proxy[2] != None:
-                portnum = self.__proxy[2]
-            else:
-                portnum = 8080
-            _orgsocket.connect(self,(self.__proxy[1],portnum))
-            if destpair[1] == 443:
-                self.__negotiatehttp(destpair[0],destpair[1])
-            else:
-                self.__httptunnel = False
         elif self.__proxy[0] == None:
             _orgsocket.connect(self, (destpair[0], destpair[1]))
         else:
