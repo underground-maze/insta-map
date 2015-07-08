@@ -2,8 +2,8 @@ import random
 import json
 import time
 import traceback
+import subprocess
 
-import socks
 import http
 import httplib2
 
@@ -61,7 +61,10 @@ def get_authenticated_service():
     credentials = AccessTokenCredentials(access_token=get_auth_code(), user_agent='insta-python/1.0')
     # create httplib proxy connection
     if settings.USE_PROXY:
+        import socks
+        # set socks proxy to ssh tunnel
         socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, 'localhost', 1080)
+        # wrap httplib via proxy
         socks.wrapmodule(httplib2)
     # create connection to youtube api
     return build(
@@ -108,6 +111,11 @@ def resumable_upload(insert_request):
 
 def upload_video(card):
     try:
+        if USE_PROXY:
+            # init ssh tunnel connection
+            subprocess.Popen(['ssh', '-fN', '-D', '1080', 'forward@wbmonster'])
+            # wait some time while connection established
+            time.sleep(10)
         # try to upload video
         video_id = initialize_upload(get_authenticated_service(), card)
         # if failed uploading raise error
@@ -126,3 +134,8 @@ def upload_video(card):
         kwargs = dict(card=card, status=YoutubeLogger.STATUS_SUCCESS, description=card.video_url)
     finally:
         YoutubeLogger.objects.create(**kwargs)
+        if USE_PROXY:
+            # desctroy ssh tunnel connection
+            subprocess.Popen(['pkill', '-f', 'forward@wbmonster'])
+            # wait some time while connection will closed
+            time.sleep(10)
