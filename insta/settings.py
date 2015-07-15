@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     # additional apps
     'geoposition',
     'compressor',
+    'captcha',
     # insta apps
     'accounts',
     'index',
@@ -152,6 +153,11 @@ BROKER_URL = 'redis://localhost:6379/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ('pickle', 'json', )
+
+#Recapthca settings
+RECAPTCHA_PUBLIC_KEY = 'public_key'
+RECAPTCHA_PRIVATE_KEY = 'private_key'
+NOCAPTCHA = True
 
 USE_PROXY = False
 
