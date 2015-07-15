@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     var $form = $('#add-card-form'),
         $progress = $('div.progress-bar'),
-        fields = ['position', 'email', 'description', 'video'],
+        fields = ['position', 'email', 'description', 'video', 'captcha'],
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
@@ -43,7 +43,7 @@ $(document).ready(function () {
         fields.forEach(function(value) {
             if (errors[value]){
                 // set error css class for parent div
-                $form.find('#' + value).parent().addClass(error_class);
+                $form.find(error_container_template + value).parent().addClass(error_class);
                 // insert errors
                 var container = $form.find(error_container_template + value);
                 errors[value].forEach(function(error_msg){
@@ -100,6 +100,14 @@ $(document).ready(function () {
             if (file.type.indexOf('video') == -1) {
                 errors['video'] = ['Загрузите видео файл.'];
             }
+        }
+
+        // validate re captcha
+        var value = grecaptcha.getResponse();
+        if (!value.trim()){
+            is_valid = false;
+            // set required msg error
+            errors['captcha'] = [required_error];
         }
 
         // insert errors

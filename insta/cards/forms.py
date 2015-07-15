@@ -4,6 +4,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
 
+from captcha.fields import ReCaptchaField
+
 from cards.models import Card
 from accounts.models import InstaUser
 
@@ -14,6 +16,8 @@ class AddCardForm(forms.ModelForm):
 
     required_msg = 'Обязательное поле.'
     email_invalid = 'Введите корректный адрес электронной почты.'
+
+    captcha = ReCaptchaField()
 
     class Meta:
         model = Card
