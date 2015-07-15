@@ -96,6 +96,9 @@ STATIC_ROOT = 'markup/static/'
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = 'markup/static/media/'
 
+# for allow celery file deletions
+FILE_UPLOAD_PERMISSIONS = 0o0777
+
 TEMPLATE_DIRS = (join(BASE_DIR, 'insta', 'templates'), )
 
 # compressor settings
