@@ -17,6 +17,8 @@ class AddCardForm(forms.ModelForm):
     required_msg = 'Обязательное поле.'
     email_invalid = 'Введите корректный адрес электронной почты.'
 
+    captcha = ReCaptchaField()
+
     class Meta:
         model = Card
         fields = ('position', 'video', 'description', 'radius', )
