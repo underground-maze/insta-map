@@ -23,7 +23,7 @@ class AddCardForm(forms.ModelForm):
         model = Card
         fields = ('position', 'video', 'description', 'radius', )
 
-    email = forms.EmailField(required=True, max_length=200, error_messages=dict(invalid=email_invalid))
+    email = forms.EmailField(required=False, max_length=200, error_messages=dict(invalid=email_invalid))
 
     def __init__(self, *args, **kwargs):
         kwargs = self.prepare_post_data(kwargs)
@@ -48,6 +48,7 @@ class AddCardForm(forms.ModelForm):
 
     def prepare_post_data(self, kwargs):
         """ Get latitude and longitude from request data """
+        self.user = kwargs.pop('user', None)
         position = kwargs['data'].get('position', '')
         if position.strip():
             kwargs['data'] = deepcopy(kwargs['data'])
