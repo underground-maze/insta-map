@@ -213,3 +213,8 @@ try:
         from settings_travis import *  # noqa
 except ImportError:
     pass
+
+
+if TESTING:
+
+    os.environ['RECAPTCHA_TESTING'] = 'True'

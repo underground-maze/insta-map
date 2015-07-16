@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from helpers.tests import InstaTransactionTestCase
+from cards.models import Card
 
 
 class AddCardViewTestCase(InstaTransactionTestCase):
@@ -11,6 +12,7 @@ class AddCardViewTestCase(InstaTransactionTestCase):
     def setUp(self):
         self.url = reverse('card:add')
         self.ajax_kwargs = dict(HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self._create_admin_and_login()
 
     def test_url_resolved(self):
         """ Check url reverse correct """
@@ -75,14 +77,14 @@ class AddCardViewTestCase(InstaTransactionTestCase):
 
     def test_add_card_form_validation_email(self):
         """ Check form validation for field 'email' """
-        # check is required field not provided
-        data = dict()
-        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
-        self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
-        # check is required field empty value
-        data = dict(email='                          ')
-        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
-        self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
+        # # check is required field not provided
+        # data = dict()
+        # response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        # self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
+        # # check is required field empty value
+        # data = dict(email='                          ')
+        # response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
+        # self.assertEqual(response['errors']['email'], ['Обязательное поле.'])
         # check is very long field value
         data = dict(email=('a' * 1001) + '@e.co')
         response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
@@ -121,3 +123,28 @@ class AddCardViewTestCase(InstaTransactionTestCase):
         data = dict(video=self.create_stream('.mov', 3))
         response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 400)
         self.assertNotIn('video', response['errors'])
+
+    def test_correct_create_card(self):
+        """ Check is correct bind to request user are """
+        # check is not created are
+        self.assertEqual(Card.objects.all().count(), 0)
+        # prepare data
+        settings.VIDEO_MIN_SIZE = 1
+        settings.VIDEO_MAX_SIZE = 5
+        data = dict(
+            video=self.create_stream('.mov', 3),
+            position='(44.61979915773973, 33.52958679199219)',
+            description='test description', )
+        data.update({'g-recaptcha-response': 'PASSED'})
+        response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 200)
+        # check creates
+        self.assertEqual(Card.objects.all().count(), 1)
+        card = Card.objects.first()
+        # check card
+        self.assertEqual(card.user, self.adminuser)
+        self.assertEqual(card.radius, 3)
+        self.assertEqual(card.description, 'test description')
+        self.assertEqual(str(card.position), '44.61979915773973,33.52958679199219')
+        self.assertEqual(str(card.position.latitude), '44.61979915773973')
+        self.assertEqual(str(card.position.longitude), '33.52958679199219')
+        self.assertTrue(card.video)
