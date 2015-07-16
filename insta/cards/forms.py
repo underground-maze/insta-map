@@ -69,5 +69,6 @@ class AddCardForm(forms.ModelForm):
         """ Add user into created instace """
         instance = super().save(commit=False)
         instance.user = self.user
+        instance.youtube_id = 'pre-moderated'
         instance.save()
         return instance

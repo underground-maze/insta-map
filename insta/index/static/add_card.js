@@ -8,8 +8,8 @@ $(document).ready(function () {
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
         required_error = 'Обязательное поле.',
-        VIDEO_MAX_SIZE = 1024 * 1024 * 1024,
-        VIDEO_MIN_SIZE = 1024 * 1024 * 10,
+        VIDEO_MAX_SIZE = 1024 * 1024 * 512,
+        VIDEO_MIN_SIZE = 1024 * 1024 * 1,
         video_size = 0;
 
     function get_csrf_token(){
@@ -140,7 +140,7 @@ $(document).ready(function () {
             var file = value[0];
             video_size = file.size;
             if ((video_size > VIDEO_MAX_SIZE) || (video_size < VIDEO_MIN_SIZE)) {
-                errors['video'] = ['Недопустимый размер файла. (min 10 mb, max 1 Gb)'];
+                errors['video'] = ['Недопустимый размер файла. (min 1 mb, max 512 Mb)'];
             }
             if (file.type.indexOf('video') == -1) {
                 errors['video'] = ['Загрузите видео файл.'];
