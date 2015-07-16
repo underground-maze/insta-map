@@ -32,7 +32,7 @@ TESTING = 'test' in sys.argv
 ALLOWED_HOSTS = ('10.1.1.123', )
 
 AUTH_USER_MODEL = 'accounts.InstaUser'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
