@@ -98,6 +98,7 @@ $(document).ready(function () {
 
         var $modal = $('.modal#card-info'),
             label = 'Я - первооткрыватель {coord}';
+
         $modal.find('iframe').attr('src', card.video);
         $modal.find('div[name="description"]').text(card.description);
         $modal.find('#card-info-label').text(label.replace('{coord}', card.latitude + ', ' + card.longitude));
@@ -105,6 +106,7 @@ $(document).ready(function () {
         window.history.pushState('Я первооткрыватель', label, '?card={id}'.replace('{id}', card_id));
         // open modal
         $('#card-info').modal('show');
+        $('#share-vk').attr('href', 'https://vk.com/share.php?url=' + encodeURIComponent(location.href));
 
         return [card.latitude, card.longitude];
     };
