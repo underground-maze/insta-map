@@ -47,5 +47,14 @@ class SiteUpdate(View):
         return dict(result='success'), 200
 
 
-index_view = IndexView.as_view()
-site_update_view = SiteUpdate.as_view()
+class IndexMenuView(View):
+
+    """ View for ajax return index page header menu """
+
+    http_method_names = ('get', )
+
+    @render_to_json
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return dict(result='anonymous'), 200
+        return dict(result='authenticated'), 200
