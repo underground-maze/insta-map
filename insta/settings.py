@@ -136,7 +136,7 @@ YOUTUBE_CATEGORY_ID = 19  # travel
 YOUTUBE_TITLE = 'I am discoverer {coord}'
 YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
 YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
-YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[1]
+YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[0]
 # additional youtube settings
 YOUTUBE_VIDEO_URL = 'http://youtu.be/{video_id}'
 YOUTUBE_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/{video_id}'
