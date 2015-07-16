@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from cards import views
 
-urlpatterns = patterns(
-    'cards.views',
-    url(r'^add$', 'add_card_view', name='add'),
+urlpatterns = (
+    url(r'^add$', views.AddCardView.as_view(), name='add'),
 )
