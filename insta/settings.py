@@ -32,6 +32,7 @@ TESTING = 'test' in sys.argv
 ALLOWED_HOSTS = ('10.1.1.123', )
 
 AUTH_USER_MODEL = 'accounts.InstaUser'
+LOGIN_REDIRECT_URL = 'index'
 
 # Application definition
 
@@ -48,6 +49,7 @@ INSTALLED_APPS = (
     'geoposition',
     'compressor',
     'captcha',
+    'social.apps.django_app.default',
     # insta apps
     'accounts',
     'index',
@@ -62,6 +64,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # social auth middleware
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'insta.urls'
@@ -158,6 +162,44 @@ CELERY_ACCEPT_CONTENT = ('pickle', 'json', )
 RECAPTCHA_PUBLIC_KEY = 'public_key'
 RECAPTCHA_PRIVATE_KEY = 'private_key'
 NOCAPTCHA = True
+
+# Social auth settings
+SOCIAL_AUTH_VK_OAUTH2_KEY = 'key'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'secret'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.vk.VKOAuth2',
+    # ...
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    # django default context processors
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    # social auth context
+    'social.apps.django_app.context_processors.backends',
+    'social.apps.django_app.context_processors.login_redirect',
+)
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.social_auth.associate_by_email',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
+
 
 USE_PROXY = False
 
