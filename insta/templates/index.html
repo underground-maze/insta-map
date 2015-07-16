@@ -119,12 +119,13 @@
                 <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
 
                 <hr />
-
+                {% comment %}
                 <div class="form-group">
                     <label for="email">Контактная информация:</label>
                     <input id="email" type="text" class="form-control" name="email" maxlength="200" placeholder="fernando@magallanes.pt">
                     <ul id="errors-email" />
                 </div>
+                {% endcomment %}
 
                 <div class="form-group">
                     <label for="description">Описание открытия:</label>

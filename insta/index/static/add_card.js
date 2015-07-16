@@ -3,7 +3,7 @@ $(document).ready(function () {
     var $main_menu = $('#main-menu'),
         $form = $('#add-card-form'),
         $progress = $('div.progress-bar'),
-        fields = ['position', 'email', 'description', 'video', 'captcha'],
+        fields = ['position', /*'email',*/ 'description', 'video', 'captcha'],
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
@@ -116,6 +116,7 @@ $(document).ready(function () {
             }
         });
 
+        /*
         // validate email field
         var value = $form.find('#email').val();
         if (!value.trim()){
@@ -129,6 +130,7 @@ $(document).ready(function () {
             // set required msg error
             errors['email'] = ['Введите корректный адрес электронной почты.'];
         }
+        */
 
         // validate video field
         var value = $form.find('#video')[0].files;
@@ -137,13 +139,14 @@ $(document).ready(function () {
             // set required msg error
             errors['video'] = [required_error];
         } else {
-            is_valid = false;
             var file = value[0];
             video_size = file.size;
             if ((video_size > VIDEO_MAX_SIZE) || (video_size < VIDEO_MIN_SIZE)) {
+                is_valid = false;
                 errors['video'] = ['Недопустимый размер файла. (min 1 mb, max 512 Mb)'];
             }
             if (file.type.indexOf('video') == -1) {
+                is_valid = false;
                 errors['video'] = ['Загрузите видео файл.'];
             }
         }

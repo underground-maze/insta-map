@@ -15,7 +15,7 @@ class InstaTransactionTestCase(TransactionTestCase):
         return self.assertEqual(response.status_code, http.client.OK)
 
     def assert302(self, response):
-        return self.assertEqual(response.status_code, http.client.OK)
+        return self.assertEqual(response.status_code, http.client.FOUND)
 
     def _create_admin_and_login(self):
         self.adminuser = InstaUser.objects.create_superuser('admin', 'admin@test.com', 'pass')

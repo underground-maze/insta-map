@@ -14,7 +14,7 @@ class AddCardView(FormView):
 
     @render_to_json
     def dispatch(self, request, *args, **kwargs):
-        if not request.is_ajax():
+        if not request.is_ajax() or not request.user.is_authenticated():
             return dict(message='Forbidden'), 403
         return super().dispatch(request, *args, **kwargs)
 
@@ -29,5 +29,7 @@ class AddCardView(FormView):
         self.object = form.save()
         return dict(result='success'), 200
 
-
-add_card_view = AddCardView.as_view()
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update(user=self.request.user)
+        return kwargs
