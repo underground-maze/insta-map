@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    var $form = $('#add-card-form'),
+    var $main_menu = $('#main-menu'),
+        $form = $('#add-card-form'),
         $progress = $('div.progress-bar'),
         fields = ['position', 'email', 'description', 'video', 'captcha'],
         error_class = 'has-error',
@@ -19,6 +20,30 @@ $(document).ready(function () {
             success: function(response) {
                 // insert input into form
                 $form.find('#csrf_token').val(response['csrf_token']);
+            },
+            error: function() {
+                console.log(arguments);
+            }
+        });
+    };
+
+    function get_main_menu(){
+        // get main_menu from backend use ajax
+        $.ajax({
+            url: '/anonymous',
+            type: 'GET',
+            success: function(response) {
+                if (response.result === 'anonymous'){
+                    $main_menu.html(
+                        '<li><a href="/login">Войти через <strong>Вконтакте</strong></a></li>');
+                } else if (response.result === 'authenticated'){
+                    $main_menu.html(
+                        '<li><a role="button" id="add-card-link">Совершить открытие</a></li>' +
+                        '<li><a href="/logout">Выйти</a></li>');
+                    $('#add-card-link').click(function(){
+                        $('#add-card').modal('show');
+                    });
+                }
             },
             error: function() {
                 console.log(arguments);
@@ -179,5 +204,7 @@ $(document).ready(function () {
 
         return false;
     });
+
+    get_main_menu();
 
 });
