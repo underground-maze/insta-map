@@ -139,13 +139,14 @@ $(document).ready(function () {
             // set required msg error
             errors['video'] = [required_error];
         } else {
-            is_valid = false;
             var file = value[0];
             video_size = file.size;
             if ((video_size > VIDEO_MAX_SIZE) || (video_size < VIDEO_MIN_SIZE)) {
+                is_valid = false;
                 errors['video'] = ['Недопустимый размер файла. (min 1 mb, max 512 Mb)'];
             }
             if (file.type.indexOf('video') == -1) {
+                is_valid = false;
                 errors['video'] = ['Загрузите видео файл.'];
             }
         }
