@@ -137,6 +137,7 @@ class AddCardViewTestCase(InstaTransactionTestCase):
             description='test description', )
         data.update({'g-recaptcha-response': 'PASSED'})
         response = self.json_response(self.client.post(self.url, data=data, **self.ajax_kwargs), 200)
+        self.assertDictEqual(response, dict(result='success'))
         # check creates
         self.assertEqual(Card.objects.all().count(), 1)
         card = Card.objects.first()
