@@ -28,18 +28,38 @@ $(document).ready(function () {
     };
 
     function get_main_menu(){
+
         // get main_menu from backend use ajax
         $.ajax({
             url: '/anonymous',
             type: 'GET',
             success: function(response) {
                 if (response.result === 'anonymous'){
-                    $main_menu.html(
-                        '<li><a href="/login">Войти через <strong>Вконтакте</strong></a></li>');
+                    $main_menu.html(''
+                        // vk login btn
+                        +   '<li>'
+                        +       '<p class="navbar-btn">'
+                        +           '<a href="/login" class="btn btn-sm btn-social btn-vk ">'
+                        +               '<i class="fa fa-vk"></i> Войти через Вконтакте'
+                        +           '</a>'
+                        +       '</p>'
+                        +   '</li>'
+                    );
                 } else if (response.result === 'authenticated'){
-                    $main_menu.html(
-                        '<li><a role="button" id="add-card-link">Совершить открытие</a></li>' +
-                        '<li><a href="/logout">Выйти</a></li>');
+                    $main_menu.html(''
+                        // create new card btn
+                        +   '<li>'
+                        +       '<a role="button" id="add-card-link">Совершить открытие</a>'
+                        +   '</li>'
+                        // vk logout btn
+                        +   '<li>'
+                        +       '<p class="navbar-btn">'
+                        +           '<a href="/logout" class="btn btn-sm btn-social btn-vk ">'
+                        +               '<i class="fa fa-vk"></i> Выйти'
+                        +           '</a>'
+                        +       '</p>'
+                        +   '</li>'
+                    );
                     $('#add-card-link').click(function(){
                         $('#add-card').modal('show');
                     });
