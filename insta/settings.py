@@ -145,8 +145,8 @@ YOUTUBE_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/{video_id}'
 VIDEO_MIME_TYPES = (
     'application/ogg', 'video/quicktime', 'video/mp4', 'video/x-msvideo', 'video/mpeg', 'video/x-ms-wmv')
 VIDEO_EXT = ('.ogv', '.mov', '.mp4', '.avi', '.mpg', '.wmv')
-VIDEO_MAX_SIZE = 1024 * 1024 * 1024  # 1 Gb
-VIDEO_MIN_SIZE = 1024 * 1024 * 10    # 10 Mb
+VIDEO_MAX_SIZE = 1024 * 1024 * 512  # 512 Mb
+VIDEO_MIN_SIZE = 1024 * 1024 * 1    # 1 Mb
 
 # CELERY SETTINGS
 BROKER_URL = 'redis://localhost:6379/0'
