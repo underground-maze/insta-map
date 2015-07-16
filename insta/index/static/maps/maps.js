@@ -128,10 +128,6 @@ $(document).ready(function () {
         }
     }
 
-    $('#add-card-link').click(function(){
-        $('#add-card').modal('show');
-    });
-
     $('#add-card').on('shown.bs.modal', function(){
         init_mini_map();
     });

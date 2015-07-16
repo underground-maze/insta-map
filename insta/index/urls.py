@@ -1,7 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from index import views
 
-urlpatterns = patterns(
-    'index.views',
-    url(r'^home$', 'index_view', name='index'),
-    url(r'^update$', 'site_update_view', name='site_update'),
+urlpatterns = (
+    url(r'^home$', views.IndexView.as_view(), name='index'),
+    url(r'^update$', views.SiteUpdate.as_view(), name='site_update'),
+    url(r'^anonymous$', views.IndexMenuView.as_view(), name='anonymous_view'),
 )
