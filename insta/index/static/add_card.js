@@ -3,7 +3,7 @@ $(document).ready(function () {
     var $main_menu = $('#main-menu'),
         $form = $('#add-card-form'),
         $progress = $('div.progress-bar'),
-        fields = ['position', 'email', 'description', 'video', 'captcha'],
+        fields = ['position', /*'email',*/ 'description', 'video', 'captcha'],
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
@@ -116,6 +116,7 @@ $(document).ready(function () {
             }
         });
 
+        /*
         // validate email field
         var value = $form.find('#email').val();
         if (!value.trim()){
@@ -129,6 +130,7 @@ $(document).ready(function () {
             // set required msg error
             errors['email'] = ['Введите корректный адрес электронной почты.'];
         }
+        */
 
         // validate video field
         var value = $form.find('#video')[0].files;

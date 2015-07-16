@@ -62,7 +62,7 @@ class AddCardForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email', '').strip().lower()
-        if email:
+        if email and self.user is None:
             self.user, created = InstaUser.objects.get_or_create(email=email)
         return email
 
