@@ -31,6 +31,8 @@ TESTING = 'test' in sys.argv
 
 ALLOWED_HOSTS = ('10.1.1.123', )
 
+SITE_URL = 'http://revealer.ru'
+
 AUTH_USER_MODEL = 'accounts.InstaUser'
 LOGIN_REDIRECT_URL = '/'
 
@@ -225,3 +227,4 @@ except ImportError:
 if TESTING:
 
     os.environ['RECAPTCHA_TESTING'] = 'True'
+    CELERY_ALWAYS_EAGER = True
