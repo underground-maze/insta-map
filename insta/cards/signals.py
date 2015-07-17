@@ -43,7 +43,16 @@ def update_coord_js(sender, instance, **kwargs):
         render_to_file('index.html', {}, 'index.html')
 
 
+def email_notify_accepted(sender, instance, **kwargs):
+    """ Sent notification to user if card is accepted """
+    if not instance.pk or not instance.is_accepted:
+        return
+
+    instance_db = Card.objects.get(pk=instance.pk)
+
+
 pre_save.connect(escape_tags, sender=Card)
 post_save.connect(upload_on_youtube, sender=Card)
 post_save.connect(update_coord_js, sender=Card)
 pre_save.connect(delete_video, sender=Card)
+pre_save.connect(email_notify_accepted, sender=Card)
