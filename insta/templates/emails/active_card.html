@@ -1,4 +1,4 @@
-<p>Уважаемый {{ instance.user.first_name|default:'Первооткрыватель' }}, здравствуйте!</p>
+<p>{{ instance.user.first_name|default:'Первооткрыватель' }}, здравствуйте!</p>
 <p>Только что администраторы подтвердили ваше открытие!</p>
 <p>Поздравляем! Спасибо, что открываете мир заново, вместе с нами!</p>
 <p>Вы можете посмотреть его перейдя по ссылке <a href="{{site_url}}/{{ instance.get_absolute_url}}">{{site_url}}/{{ instance.get_absolute_url}}</a></p>
