@@ -227,3 +227,4 @@ except ImportError:
 if TESTING:
 
     os.environ['RECAPTCHA_TESTING'] = 'True'
+    CELERY_ALWAYS_EAGER = True
