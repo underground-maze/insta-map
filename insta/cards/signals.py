@@ -55,6 +55,7 @@ def email_notify_accepted(sender, instance, **kwargs):
         # async send msg
         send_message_task.delay(send_accepted_card_message, instance)
 
+
 def email_notify_new(sender, instance, **kwargs):
     """ Sent notification to staff if card is created """
     if kwargs['created']:
