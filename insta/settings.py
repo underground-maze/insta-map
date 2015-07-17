@@ -200,6 +200,13 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details'
 )
 
+# email settings
+DEFAULT_FROM_EMAIL = 'info@revealer.ru'
+EMAIL_HOST = 'host'
+EMAIL_PORT = 0
+EMAIL_HOST_USER = 'user'
+EMAIL_HOST_PASSWORD = 'password'
+
 
 USE_PROXY = False
 
