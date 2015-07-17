@@ -8,6 +8,7 @@ from cards.tasks import upload_on_youtube_task
 
 from helpers.coordinates import get_map_polygons, get_map_markers
 from helpers.service import write_js, render_to_file
+from helpers.emails import send_accepted_card_message
 
 
 def escape_tags(sender, instance, **kwargs):
@@ -47,8 +48,9 @@ def email_notify_accepted(sender, instance, **kwargs):
     """ Sent notification to user if card is accepted """
     if not instance.pk or not instance.is_accepted:
         return
-
     instance_db = Card.objects.get(pk=instance.pk)
+    if not instance_db.is_accepted:
+        send_accepted_card_message(instance)
 
 
 pre_save.connect(escape_tags, sender=Card)
