@@ -1,6 +1,4 @@
-from django import forms
 from django.core.exceptions import ValidationError
-from django.core.validators import MaxLengthValidator
 from django.contrib.auth.forms import PasswordResetForm
 
 from captcha.fields import ReCaptchaField
