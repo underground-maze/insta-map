@@ -1,0 +1,55 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Я &mdash; первооткрыватель!</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+
+        <meta name="title" content="Я первооткрыватель!" />
+        <meta name="description" content="Откроем мир заново!" />
+        <link rel="image_src" href="{{ STATIC_URL }}share.jpg" />
+
+        <link href="{{ STATIC_URL }}fontawesome/font-awesome.min.css" rel="stylesheet" />
+        <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="{{ STATIC_URL }}bootstrap/bootstrap-social.css" rel="stylesheet" />
+
+        {# jquery #}
+        <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
+        {# include bootstrap #}
+        <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
+        {# re capctha #}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </head>
+
+    <body>
+
+      <header class="navbar navbar-inverse navbar-static-top bs-docs-nav" id="top" role="banner">
+        <div class="container">
+          <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+              <span class="sr-only">Раскрывающееся меню</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Я &mdash; первооткрыватель!</a>
+          </div>
+          {% comment %}
+          <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+            <ul class="nav navbar-nav navbar-right" id="main-menu">
+                {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
+
+                {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
+                {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
+            </ul>
+          </nav>
+          {% endcomment %}
+        </div>
+      </header>
+        {% block content %}
+        {% endblock content %}
+    </body>
+<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter31293858 = new Ya.Metrika({ id:31293858, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/31293858" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</html>
+{% endspaceless %}
