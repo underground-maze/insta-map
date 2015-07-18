@@ -168,6 +168,7 @@ NOCAPTCHA = True
 # Social auth settings
 SOCIAL_AUTH_VK_OAUTH2_KEY = 'key'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'secret'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.vk.VKOAuth2',
