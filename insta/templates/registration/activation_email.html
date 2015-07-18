@@ -1,0 +1,24 @@
+<html>
+
+<head><title>Регистрация / Я — первооткрыватель!</title></head>
+
+<body>
+
+<h2>Регистрация / Я — первооткрыватель!</h2>
+
+<p>Вы (либо кто то другой) попросили зарегистрировать учетную запись на сайте "Я — первооткрыватель!".
+Если это не вы, пожалуйста, проигнорируйте это письмо и ваш адрес будет удален из наших записей.</p>
+
+<p>Чтобы активировать эту учетную запись, пожалуйста, перейдите по следующей ссылке в течении {{ expiration_days }} дней:</p>
+
+<p>
+    <a href="http://revealer.ru{% url 'registration_activate' activation_key %}">
+        http://revealer.ru{% url 'registration_activate' activation_key %}
+    </a>
+</p>
+
+<p>Я — первооткрыватель! [<a href="mailto:info@revealer.ru">info@revealer.ru</a>].</p>
+
+</body>
+
+</html>

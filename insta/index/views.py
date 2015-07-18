@@ -57,4 +57,5 @@ class IndexMenuView(View):
     def get(self, request, *args, **kwargs):
         if not request.user.is_authenticated():
             return dict(result='anonymous'), 200
-        return dict(result='authenticated'), 200
+
+        return dict(result='authenticated', username=request.user.preaty_name), 200

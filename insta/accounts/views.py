@@ -1,9 +1,11 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth import logout
 
 
 def login_view(request):
-    return redirect('/login/vk-oauth2')
+    if request.user.is_authenticated():
+        return redirect('/')
+    return render(request, 'login.html')
 
 
 def logout_view(request):

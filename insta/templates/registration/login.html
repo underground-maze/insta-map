@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block extra_styles %}
+    <link href="{{ STATIC_URL }}bootstrap/signin.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        {# <div class="col-md-4 col-md-offset-4"> #}
+            <form class="form-signin" method="POST" action="{% url 'auth_login' %}">
+
+                <h2 class="form-signin-heading">Добро пожаловать</h2>
+
+                {% csrf_token %}
+                {% bootstrap_form form %}
+
+                {% buttons %}
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+                {% endbuttons %}
+                <p>Нет аккаунта? <a href="{% url 'registration_register' %}">Зарегистрируйтесь</a>.</p>
+                <p>Забыли пароль? Попробуйте <a href="{% url 'custom_password_reset' %}">восстановить</a>.</p>
+
+            </form>
+
+        {# </div> #}
+    </div>
+
+{% endblock%}
