@@ -40,7 +40,8 @@ LOGIN_URL = '/login/'
 # registration settings
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = True
+REGISTRATION_AUTO_LOGIN = False
+REGISTRATION_FORM = 'accounts.forms.InstaRegistrationForm'
 
 # Application definition
 
