@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'captcha',
     'social.apps.django_app.default',
     'registration',
+    'bootstrap3',
     # insta apps
     'accounts',
     'index',
