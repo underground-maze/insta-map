@@ -1,5 +1,5 @@
 <p>Уважаемый сотрудник, здравствуйте!</p>
 <p>Только что было заявлено о новом открытии!</p>
-<p>Вы можете проверить его перейдя по ссылке <a href="{{ SETTINGS.SITE_URL }}{% url 'admin:cards_card_change' instance.pk %}">{{ SETTINGS.SITE_URL }}{% url 'admin:cards_card_change' instance.pk %}</a></p>
+<p>Вы можете проверить его перейдя по ссылке <a href="{{site_url}}{% url 'admin:cards_card_change' instance.pk %}">{{site_url}}{% url 'admin:cards_card_change' instance.pk %}</a></p>
 
-<p>Я — первооткрыватель! [<a href="mailto:{{ SETTINGS.DEFAULT_FROM_EMAIL }}">{{ SETTINGS.DEFAULT_FROM_EMAIL }}</a>].</p>
+<p>Я — первооткрыватель! [<a href="mailto:{{ support_email }}">{{ support_email }}</a>].</p>
