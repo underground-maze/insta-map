@@ -1,35 +1,24 @@
 <html>
 
-<head>
-    <title>{{ site.name }} {% trans "registration" %}</title>
-</head>
+<head><title>Регистрация / Я — первооткрыватель!</title></head>
 
 <body>
-<p>
-    {% blocktrans with site_name=site.name %}
-    You (or someone pretending to be you) have asked to register an account at
-    {{ site_name }}.  If this wasn't you, please ignore this email
-    and your address will be removed from our records.
-    {% endblocktrans %}
-</p>
-<p>
-    {% blocktrans %}
-    To activate this account, please click the following link within the next
-    {{ expiration_days }} days:
-    {% endblocktrans %}
-</p>
+
+<h2>Регистрация / Я — первооткрыватель!</h2>
+
+<p>Вы (либо кто то другой) попросили зарегистрировать учетную запись на сайте "Я — первооткрыватель!".
+Если это не вы, пожалуйста, проигнорируйте это письмо и ваш адрес будет удален из наших записей.</p>
+
+<p>Чтобы активировать эту учетную запись, пожалуйста, перейдите по следующей ссылке в течении {{ expiration_days }} дней:</p>
 
 <p>
     <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}">
         {{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}
     </a>
 </p>
-<p>
-    {% blocktrans with site_name=site.name %}
-    Sincerely,
-    {{ site_name }} Management
-    {% endblocktrans %}
-</p>
+
+<p>Я — первооткрыватель! [<a href="mailto:info@revealer.ru">info@revealer.ru</a>].</p>
+
 </body>
 
 </html>
