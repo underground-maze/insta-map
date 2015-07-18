@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxLengthValidator
+from django.contrib.auth.forms import PasswordResetForm
 
 from captcha.fields import ReCaptchaField
 from registration.forms import RegistrationForm
@@ -31,3 +32,10 @@ class InstaRegistrationForm(RegistrationForm):
         if InstaUser.objects.filter(email__iexact=email):
             raise ValidationError('Пользователь, с таким адресом электронной почты, уже зарегистрирован.')
         return email
+
+
+class InstaPasswordResetForm(PasswordResetForm):
+
+    """ Custom password reset form """
+
+    captcha = ReCaptchaField(label='')
