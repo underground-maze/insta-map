@@ -5,6 +5,6 @@
 
 Чтобы активировать эту учетную запись, пожалуйста, перейдите по следующей ссылке в течении {{ expiration_days }} дней:
 
-{{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}
+{{ SETTINGS.SITE_URL }}{% url 'registration_activate' activation_key %}
 
-Я — первооткрыватель! [info@revealer.ru].
+Я — первооткрыватель! [{{ SETTINGS.DEFAULT_FROM_EMAIL }}].

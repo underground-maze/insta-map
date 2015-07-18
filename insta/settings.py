@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'accounts',
     'index',
     'cards',
+    'helpers',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -197,6 +198,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # social auth context
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
+    # helper context processor
+    'helpers.context_processors.django_settings',
 )
 
 SOCIAL_AUTH_PIPELINE = (

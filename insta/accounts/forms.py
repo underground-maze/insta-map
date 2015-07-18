@@ -30,3 +30,4 @@ class InstaRegistrationForm(RegistrationForm):
         email = self.cleaned_data.get('email')
         if InstaUser.objects.filter(email__iexact=email):
             raise ValidationError('Пользователь, с таким адресом электронной почты, уже зарегистрирован.')
+        return email

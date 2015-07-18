@@ -12,12 +12,12 @@
 <p>Чтобы активировать эту учетную запись, пожалуйста, перейдите по следующей ссылке в течении {{ expiration_days }} дней:</p>
 
 <p>
-    <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}">
-        {{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}
+    <a href="{{ SETTINGS.SITE_URL }}{% url 'registration_activate' activation_key %}">
+        {{ SETTINGS.SITE_URL }}{% url 'registration_activate' activation_key %}
     </a>
 </p>
 
-<p>Я — первооткрыватель! [<a href="mailto:info@revealer.ru">info@revealer.ru</a>].</p>
+<p>Я — первооткрыватель! [<a href="mailto:{{ SETTINGS.DEFAULT_FROM_EMAIL }}">{{ SETTINGS.DEFAULT_FROM_EMAIL }}</a>].</p>
 
 </body>
 
