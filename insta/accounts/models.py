@@ -21,3 +21,9 @@ class InstaUser(AbstractUser):
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
         db_table = 'auth_user'
+
+    @property
+    def preaty_name(self):
+        full_name = ' '.join((self.first_name or '', self.last_name or '')).strip()
+        username = ' '.join((self.username, (' ({})'.format(full_name) if full_name else ''))).strip()
+        return username

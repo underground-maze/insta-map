@@ -28,7 +28,6 @@ $(document).ready(function () {
     };
 
     function get_main_menu(){
-
         // get main_menu from backend use ajax
         $.ajax({
             url: '/anonymous',
@@ -36,13 +35,9 @@ $(document).ready(function () {
             success: function(response) {
                 if (response.result === 'anonymous'){
                     $main_menu.html(''
-                        // vk login btn
+                        // login btn
                         +   '<li>'
-                        +       '<p class="navbar-btn">'
-                        +           '<a href="/login" class="btn btn-sm btn-social btn-vk ">'
-                        +               '<i class="fa fa-vk"></i> Войти через Вконтакте'
-                        +           '</a>'
-                        +       '</p>'
+                        +       '<a href="/login">Войти</a>'
                         +   '</li>'
                     );
                 } else if (response.result === 'authenticated'){
@@ -51,13 +46,15 @@ $(document).ready(function () {
                         +   '<li>'
                         +       '<a role="button" id="add-card-link">Совершить открытие</a>'
                         +   '</li>'
-                        // vk logout btn
+                        // user info
                         +   '<li>'
-                        +       '<p class="navbar-btn">'
-                        +           '<a href="/logout" class="btn btn-sm btn-social btn-vk ">'
-                        +               '<i class="fa fa-vk"></i> Выйти'
-                        +           '</a>'
+                        +       '<p class="navbar-text">'
+                        +           response.username
                         +       '</p>'
+                        +   '</li>'
+                        // logout btn
+                        +   '<li>'
+                        +       '<a href="/logout">Выйти</a>'
                         +   '</li>'
                     );
                     $('#add-card-link').click(function(){

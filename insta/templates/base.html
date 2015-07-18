@@ -39,8 +39,8 @@
           <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav navbar-right" id="main-menu">
                   {% if user.is_authenticated %}
-                      <li><a role="button" id="add-card-link">Совершить открытие</a></li>
-                      <li><p class="navbar-text">{{ user.username }}{% if user.first_name %} ({{ user.first_name }} {{ user.last_name }}){% endif %}</p></li>
+                      {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
+                      <li><p class="navbar-text">{{ user.preaty_name }}</p></li>
                       <li><a href="/logout">Выйти</a></li>
                   {% else %}
                       <li><a href="/login">Войти</a></li>
