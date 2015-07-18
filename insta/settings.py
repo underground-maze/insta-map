@@ -35,6 +35,12 @@ SITE_URL = 'http://revealer.ru'
 
 AUTH_USER_MODEL = 'accounts.InstaUser'
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
+
+# registration settings
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
 
 # Application definition
 
@@ -52,6 +58,7 @@ INSTALLED_APPS = (
     'compressor',
     'captcha',
     'social.apps.django_app.default',
+    'registration',
     # insta apps
     'accounts',
     'index',
