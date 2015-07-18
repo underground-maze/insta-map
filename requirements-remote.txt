@@ -16,3 +16,4 @@ shapely==1.5.9
 django_compressor==1.5
 django-recaptcha==1.0.4
 python-social-auth==0.2.12
+django-registration-redux==1.2
