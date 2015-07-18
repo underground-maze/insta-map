@@ -36,16 +36,17 @@
             </button>
             <a class="navbar-brand" href="/">Я &mdash; первооткрыватель!</a>
           </div>
-          {% comment %}
           <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
             <ul class="nav navbar-nav navbar-right" id="main-menu">
-                {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
-
-                {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
-                {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
+                  {% if user.is_authenticated %}
+                      <li><a role="button" id="add-card-link">Совершить открытие</a></li>
+                      <li><p class="navbar-text">{{ user.username }}{% if user.first_name %} ({{ user.first_name }} {{ user.last_name }}){% endif %}</p></li>
+                      <li><a href="/logout">Выйти</a></li>
+                  {% else %}
+                      <li><a href="/login">Войти</a></li>
+                  {% endif %}
             </ul>
           </nav>
-          {% endcomment %}
         </div>
       </header>
         {% block content %}{% endblock content %}
