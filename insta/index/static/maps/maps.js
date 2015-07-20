@@ -129,7 +129,7 @@ $(document).ready(function () {
     }
 
     function get_position(position){
-        init_mini_map(position.coords.latitude, position.coords.longitude, 10);
+        init_mini_map(position.coords.latitude, position.coords.longitude, 13);
         var coords = '(' + position.coords.latitude + ',' + position.coords.longitude + ')';
         $('#add-card').find('input[name="position"]').val(coords)
     }
