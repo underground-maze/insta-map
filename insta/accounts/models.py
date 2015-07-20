@@ -18,6 +18,7 @@ class InstaUser(AbstractUser):
         return super().save(*args, **kwargs)
 
     class Meta:
+        app_label = 'auth'
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
         db_table = 'auth_user'
