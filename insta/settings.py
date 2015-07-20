@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ('10.1.1.123', )
 
 SITE_URL = 'http://revealer.ru'
 
-AUTH_USER_MODEL = 'auth.InstaUser'
+AUTH_USER_MODEL = 'accounts.InstaUser'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
