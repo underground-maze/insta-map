@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.core.validators import MinLengthValidator
 from django.contrib.auth.forms import PasswordResetForm
 
 from captcha.fields import ReCaptchaField
@@ -22,6 +23,8 @@ class InstaRegistrationForm(RegistrationForm):
         for name, field in self.fields.items():
             field.required = True
             field.widget.attrs['required'] = 'required'
+        # minimum password length
+        self.fields['password1'].validators += [MinLengthValidator(6)]
         # remove username fields
         del self.fields['username']
 
