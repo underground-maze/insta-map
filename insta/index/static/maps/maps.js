@@ -56,11 +56,11 @@ $(document).ready(function () {
         modal_from_get(map);
     };
 
-    function init_mini_map() {
+    function init_mini_map(lat, lon, zoom) {
         // Create the map.
-        var position = new google.maps.LatLng(43.296944, 34.029444);
+        var position = new google.maps.LatLng(lat, lon);
         var mini_map_options = {
-            zoom: 3,
+            zoom: zoom,
             center: position,
             mapTypeControl: true,
             zoomControl: true,
@@ -128,8 +128,18 @@ $(document).ready(function () {
         }
     }
 
+    function get_position(position){
+        init_mini_map(position.coords.latitude, position.coords.longitude, 10);
+        var coords = '(' + position.coords.latitude + ',' + position.coords.longitude + ')';
+        $('#add-card').find('input[name="position"]').val(coords)
+    }
+
+    function no_position(error){
+        init_mini_map(43.296944, 34.029444, 3);
+    }
+
     $('#add-card').on('shown.bs.modal', function(){
-        init_mini_map();
+        $.geolocation.get({win: get_position, fail: no_position});
     });
 
     init_map();
