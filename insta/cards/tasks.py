@@ -1,7 +1,7 @@
 from celery import shared_task
 
 from helpers.youtube import upload_video
-from helpers.service import  site_update
+from helpers.service import site_update
 
 from cards.models import Card
 

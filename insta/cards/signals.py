@@ -1,13 +1,9 @@
-import json
-
 from django.db.models.signals import post_save, pre_save
 from django.utils.html import strip_tags
 
 from cards.models import Card
-from cards.tasks import upload_on_youtube_task, send_message_task
+from cards.tasks import upload_on_youtube_task, send_message_task, site_update_task
 
-from helpers.coordinates import get_map_polygons, get_map_markers
-from helpers.service import write_js, render_to_file
 from helpers.emails import send_accepted_card_message, send_new_card_message
 
 
@@ -30,18 +26,10 @@ def delete_video(sender, instance, **kwargs):
         instance.video.delete(False)
 
 
-def update_coord_js(sender, instance, **kwargs):
+def update_main_page(sender, instance, **kwargs):
     """ Resave the fog of war map js """
     if not instance.is_new:
-        # get coord of all active cards
-        active = Card.active.all()
-        # get js representation of card polygons
-        polygons = get_map_polygons([card.as_tuple() for card in active])
-        markers = get_map_markers([card.as_dict() for card in active])
-        markers_data = json.dumps({card.pk: card.as_dict() for card in active})
-        # write the script into file
-        write_js(polygons, markers, markers_data)
-        render_to_file('index.html', {}, 'index.html')
+        site_update_task.delay()
 
 
 def email_notify_accepted(sender, instance, **kwargs):
@@ -65,7 +53,7 @@ def email_notify_new(sender, instance, **kwargs):
 
 pre_save.connect(escape_tags, sender=Card)
 post_save.connect(upload_on_youtube, sender=Card)
-post_save.connect(update_coord_js, sender=Card)
+post_save.connect(update_main_page, sender=Card)
 pre_save.connect(delete_video, sender=Card)
 pre_save.connect(email_notify_accepted, sender=Card)
 post_save.connect(email_notify_new, sender=Card)
