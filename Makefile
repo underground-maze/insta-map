@@ -14,9 +14,8 @@ lint:
 test:
 	venv/bin/python manage.py test insta -v 2
 
-recompress:
+recollect:
 	python manage.py collectstatic --noinput
-	python manage.py compress --force
 
 ci_test:
 	python manage.py test insta -v 2
