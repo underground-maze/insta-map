@@ -25,6 +25,9 @@
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
         {% compress js %}
+
+
+
           {# jquery #}
           <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
           <script type="text/javascript" src="{{ STATIC_URL }}jquery.geolocation.min.js"></script>
@@ -36,16 +39,12 @@
           <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
           {# include add card script #}
           <script type="text/javascript" src="{{ STATIC_URL }}add_card.js"></script>
+          {# youtube autoresize #}
+          <script type="text/javascript" src="{{ STATIC_URL }}youtube-autoresizer.js"></script>
         {% endcompress %}
-
-        {# youtube autoresize #}
-        <script src="https://cdn.rawgit.com/skipser/youtube-autoresize/master/youtube-autoresizer.js"></script>
 
         {# re capctha #}
         <script src='https://www.google.com/recaptcha/api.js'></script>
-
-        {# shares #}
-        <script type="text/javascript" src="http://vk.com/js/api/share.js?91" charset="windows-1251"></script>
 
     </head>
 
