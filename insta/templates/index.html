@@ -11,14 +11,14 @@
         <link rel="image_src" href="{{ STATIC_URL }}share.jpg" />
 
         {% compress css %}
-          <style>
-              div#map-canvas {height: 100vh}
-              div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
-          </style>
+            <style>
+                div#map-canvas {height: 100vh}
+                div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
+            </style>
 
-          <link href="{{ STATIC_URL }}fontawesome/font-awesome.min.css" rel="stylesheet" />
-          <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
-          <link href="{{ STATIC_URL }}bootstrap/bootstrap-social.css" rel="stylesheet" />
+            <link href="{{ STATIC_URL }}fontawesome/font-awesome.min.css" rel="stylesheet" />
+            <link href="{{ STATIC_URL }}bootstrap/bootstrap.min.css" rel="stylesheet" />
+            <link href="{{ STATIC_URL }}bootstrap/bootstrap-social.css" rel="stylesheet" />
         {% endcompress %}
 
         {# include maps js #}
@@ -26,40 +26,40 @@
 
         {% compress js %}
 
-          <script type="text/javascript">
-              var messages{
-                login: 'Войти',
-                logout: 'Выйти',
-                add_card: 'Совершить открытие',
+            <script type="text/javascript">
+                var messages{
+                    login: 'Войти',
+                    logout: 'Выйти',
+                    add_card: 'Совершить открытие',
 
-                // form validation errors
-                required_error: 'Обязательное поле.',
-                video_size_error: 'Недопустимый размер файла. (min 1 mb, max 512 Mb)',
-                video_type_error: 'Загрузите видео файл.',
+                    // form validation errors
+                    required_error: 'Обязательное поле.',
+                    video_size_error: 'Недопустимый размер файла. (min 1 mb, max 512 Mb)',
+                    video_type_error: 'Загрузите видео файл.',
 
-                form_success: ''
-                    +       '<strong>Поздравляем</strong>, ваше открытие принято. '
-                    +       'После подтверждения модератором оно будет опубликовано! '
-                    +       '<strong>Спасибо</strong>, что исследуете мир вместе с нами.'
+                    form_success: ''
+                        +   '<strong>Поздравляем</strong>, ваше открытие принято. '
+                        +   'После подтверждения модератором оно будет опубликовано! '
+                        +   '<strong>Спасибо</strong>, что исследуете мир вместе с нами.',
 
-                site_name: 'Я — первооткрыватель!',
-                card_url: '?card={id}'
-            };
-          </script>
+                    site_name: 'Я — первооткрыватель!',
+                    card_url: '?card={id}',
+                };
+            </script>
 
-          {# jquery #}
-          <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
-          <script type="text/javascript" src="{{ STATIC_URL }}jquery.geolocation.min.js"></script>
-          {# include maps js #}
-          <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
-          <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
-          <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
-          {# include bootstrap #}
-          <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
-          {# include add card script #}
-          <script type="text/javascript" src="{{ STATIC_URL }}add_card.js"></script>
-          {# youtube autoresize #}
-          <script type="text/javascript" src="{{ STATIC_URL }}youtube-autoresizer.js"></script>
+            {# jquery #}
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}jquery.geolocation.min.js"></script>
+            {# include maps js #}
+            <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
+            {# include bootstrap #}
+            <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
+            {# include add card script #}
+            <script type="text/javascript" src="{{ STATIC_URL }}add_card.js"></script>
+            {# youtube autoresize #}
+            <script type="text/javascript" src="{{ STATIC_URL }}youtube-autoresizer.js"></script>
         {% endcompress %}
 
         {# re capctha #}
@@ -69,119 +69,120 @@
 
     <body>
 
-      <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" id="top" role="banner">
-        <div class="container">
-          <div class="navbar-header">
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
-              <span class="sr-only">Раскрывающееся меню</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Я &mdash; первооткрыватель!</a>
-          </div>
-          <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-            <ul class="nav navbar-nav navbar-right" id="main-menu">
-                {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
+        <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" id="top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                        <span class="sr-only">Раскрывающееся меню</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Я &mdash; первооткрыватель!</a>
+                </div>
+                <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+                    <ul class="nav navbar-nav navbar-right" id="main-menu">
+                    {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
 
-                {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
-                {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
-            </ul>
-          </nav>
-        </div>
-      </header>
+                    {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
+                    {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
         <div id="map-canvas"></div>
     </body>
 
     {# Modal card detail #}
     <div class="modal fade" id="card-info" tabindex="-1" role="dialog" aria-labelledby="card-info-label" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="card-info-label" />
-          </div>
-          <div class="modal-body">
-            <iframe width="1280" height="720" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
-            <p><div name="description"></div></p>
-          </div>
-
-            <div class="row">
-                <div class="col-md-2 col-md-offset-10">
-                    <span style="display:inline-block;">
-                        <a id="share-vk" class="btn btn-block btn-sm btn-social btn-vk" href="#" target="_blank">
-                            <i class="fa fa-vk"></i> Поделиться
-                        </a>
-                    </span>
-                </div>
-                <br />
-                <br />
-            </div>
-        </div>
-      </div>
-    </div>
-    {# Modal add card #}
-    <div class="modal fade" id="add-card" tabindex="-1" role="dialog" aria-labelledby="add-card-label" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h2 class="modal-title" id="add-card-label">Совершить открытие</h2>
-          </div>
-          <div class="modal-body">
-            <div id="mini-map-canvas"></div>
-            <form id="add-card-form" action="{% url 'card:add' %}" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="hidden" readonly name="position" id="position">
-                    <ul id="errors-position" />
-                </div>
-                <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
-
-                <hr />
-                {% comment %}
-                <div class="form-group">
-                    <label for="email">Контактная информация:</label>
-                    <input id="email" type="text" class="form-control" name="email" maxlength="200" placeholder="fernando@magallanes.pt">
-                    <ul id="errors-email" />
-                </div>
-                {% endcomment %}
-
-                <div class="form-group">
-                    <label for="description">Описание открытия:</label>
-                    <textarea id="description" class="form-control" name="description" maxlength="1000" rows="5"></textarea>
-                    <p>Кратко поведайте миру о своем открытии.</p>
-                    <ul id="errors-description" />
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="card-info-label" />
                 </div>
 
-                <div class="form-group">
-                    <label for="video">Видео</label>
-                    <input type="file" accept="video/*" id="video" name="video">
-                    <p>Загрузите видео вашего открытия, и незабудьте в конце сказать "Я &mdash; первооткрыватель! Откроем мир заново!".</p>
-                    <ul id="errors-video" />
+                <div class="modal-body">
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/" frameborder="0" allowfullscreen></iframe>
+                    <p><div name="description"></div></p>
                 </div>
-
-                <div class="progress progress-striped active">
-                    <div class="progress-bar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                    </div>
-                </div>
-
-                <hr />
 
                 <div class="row">
-                        <div class="col-md-4">
-                            <div class="g-recaptcha" data-sitekey="6LfnVwkTAAAAACKc7i8rCLoG00DXIccUNnIILwGV"></div>
-                            <ul id="errors-captcha" />
-                        </div>
-                      <div class="col-md-2 col-md-offset-6">
-                            <button type="submit" class="btn btn-default btn-lg">Открытие!</button>
-                      </div>
+                    <div class="col-md-2 col-md-offset-10">
+                        <span style="display:inline-block;">
+                            <a id="share-vk" class="btn btn-block btn-sm btn-social btn-vk" href="#" target="_blank">
+                                <i class="fa fa-vk"></i> Поделиться
+                            </a>
+                        </span>
+                    </div>
+                    <br />
+                    <br />
                 </div>
 
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter31293858 = new Ya.Metrika({ id:31293858, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="https://mc.yandex.ru/watch/31293858" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+    {# Modal add card #}
+    <div class="modal fade" id="add-card" tabindex="-1" role="dialog" aria-labelledby="add-card-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title" id="add-card-label">Совершить открытие</h2>
+                </div>
+
+                <div class="modal-body">
+                    <div id="mini-map-canvas"></div>
+
+                    <form id="add-card-form" action="{% url 'card:add' %}" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" readonly name="position" id="position">
+                            <ul id="errors-position" />
+                        </div>
+
+                        <input type="hidden" readonly name="csrfmiddlewaretoken" id="csrf_token">
+
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="description">Описание открытия:</label>
+                            <textarea id="description" class="form-control" name="description" maxlength="1000" rows="5"></textarea>
+                            <p>Кратко поведайте миру о своем открытии.</p>
+                            <ul id="errors-description" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="video">Видео</label>
+                            <input type="file" accept="video/*" id="video" name="video">
+                            <p>Загрузите видео вашего открытия, и незабудьте в конце сказать "Я &mdash; первооткрыватель! Откроем мир заново!".</p>
+                            <ul id="errors-video" />
+                        </div>
+
+                        <div class="progress progress-striped active">
+                            <div class="progress-bar"  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="g-recaptcha" data-sitekey="6LfnVwkTAAAAACKc7i8rCLoG00DXIccUNnIILwGV"></div>
+                                <ul id="errors-captcha" />
+                            </div>
+
+                            <div class="col-md-2 col-md-offset-6">
+                                <button type="submit" class="btn btn-default btn-lg">Открытие!</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter31293858 = new Ya.Metrika({ id:31293858, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script>
 </html>
 {% endspaceless %}
