@@ -82,10 +82,12 @@
                 </div>
                 <nav id="bs-navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
                     <ul class="nav navbar-nav navbar-right" id="main-menu">
-                    {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
+                        {# <li><p class="navbar-btn"><a href="/login" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Войти через Вконтакте</a></p></li> #}
 
-                    {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
-                    {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
+                        {# <li><a role="button" id="add-card-link">Совершить открытие</a></li> #}
+                        {# <li><p class="navbar-btn"><a href="/logout" class="btn btn-sm btn-social btn-vk "><i class="fa fa-vk"></i> Выйти</a></p></li> #}
+
+                        <li><a role="button" data-toggle="modal" data-target="#about-info">О проекте</a></li>
                     </ul>
                 </nav>
             </div>
@@ -179,6 +181,23 @@
 
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    {# Modal about #}
+    <div class="modal fade" id="about-info" tabindex="-1" role="dialog" aria-labelledby="about-info-label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="about-info-label">О проекте</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Эпоха великих географических открытий давно миновала.</p>
+                </div>
+
             </div>
         </div>
     </div>
