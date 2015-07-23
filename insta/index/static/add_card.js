@@ -7,7 +7,6 @@ $(document).ready(function () {
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
-        required_error = 'Обязательное поле.',
         VIDEO_MAX_SIZE = 1024 * 1024 * 512,
         VIDEO_MIN_SIZE = 1024 * 1024 * 1,
         video_size = 0;
@@ -37,14 +36,18 @@ $(document).ready(function () {
                     $main_menu.html(''
                         // login btn
                         +   '<li>'
-                        +       '<a href="/login">Войти</a>'
+                        +       '<a href="/login">'
+                        +           messages.login
+                        +       '</a>'
                         +   '</li>'
                     );
                 } else if (response.result === 'authenticated'){
                     $main_menu.html(''
                         // create new card btn
                         +   '<li>'
-                        +       '<a role="button" id="add-card-link">Совершить открытие</a>'
+                        +       '<a role="button" id="add-card-link">'
+                        +           messages.add_card
+                        +       '</a>'
                         +   '</li>'
                         // user info
                         +   '<li>'
@@ -54,7 +57,9 @@ $(document).ready(function () {
                         +   '</li>'
                         // logout btn
                         +   '<li>'
-                        +       '<a href="/logout">Выйти</a>'
+                        +       '<a href="/logout">'
+                        +           messages.logout
+                        +       '</a>'
                         +   '</li>'
                     );
                     $('#add-card-link').click(function(){
@@ -95,11 +100,6 @@ $(document).ready(function () {
         });
     }
 
-    function validate_email(email) {
-        var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        return re.test(email);
-    }
-
     function validate_form(){
         var is_valid = true, errors = {};
 
@@ -109,42 +109,26 @@ $(document).ready(function () {
             if (!value.trim()){
                 is_valid = false;
                 // set required msg error
-                errors[item] = [required_error];
+                errors[item] = [messages.required_error];
             }
         });
-
-        /*
-        // validate email field
-        var value = $form.find('#email').val();
-        if (!value.trim()){
-            is_valid = false;
-            // set required msg error
-            errors['email'] = [required_error];
-        }
-
-        if (!validate_email(value)){
-            is_valid = false;
-            // set required msg error
-            errors['email'] = ['Введите корректный адрес электронной почты.'];
-        }
-        */
 
         // validate video field
         var value = $form.find('#video')[0].files;
         if (!value.length){
             is_valid = false;
             // set required msg error
-            errors['video'] = [required_error];
+            errors['video'] = [messages.required_error];
         } else {
             var file = value[0];
             video_size = file.size;
             if ((video_size > VIDEO_MAX_SIZE) || (video_size < VIDEO_MIN_SIZE)) {
                 is_valid = false;
-                errors['video'] = ['Недопустимый размер файла. (min 1 mb, max 512 Mb)'];
+                errors['video'] = [messages.video_size_error];
             }
             if (file.type.indexOf('video') == -1) {
                 is_valid = false;
-                errors['video'] = ['Загрузите видео файл.'];
+                errors['video'] = [messages.video_type_error];
             }
         }
 
@@ -153,7 +137,7 @@ $(document).ready(function () {
         if (!value.trim()){
             is_valid = false;
             // set required msg error
-            errors['captcha'] = [required_error];
+            errors['captcha'] = [messages.required_error];
         }
 
         // insert errors
@@ -198,9 +182,7 @@ $(document).ready(function () {
                 $parent.html(''
                     + '<div class="alert alert-info">'
                     +     '<p>'
-                    +         '<strong>Поздравляем</strong>, ваше открытие принято. '
-                    +         'После подтверждения модератором оно будет опубликовано! '
-                    +         '<strong>Спасибо</strong>, что исследуете мир вместе с нами.'
+                    +         messages.form_success
                     +     '</p>'
                     + '</div>');
             },
