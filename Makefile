@@ -15,7 +15,11 @@ test:
 	venv/bin/python manage.py test insta -v 2
 
 recollect:
+	venv/bin/python manage.py collectstatic --noinput
+
+recompress:
 	python manage.py collectstatic --noinput
+	python manage.py compress --force
 
 ci_test:
 	python manage.py test insta -v 2
