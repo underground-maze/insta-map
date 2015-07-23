@@ -33,7 +33,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function(response) {
                 if (response.result === 'anonymous'){
-                    $main_menu.html(''
+                    $main_menu.prepend(''
                         // login btn
                         +   '<li>'
                         +       '<a href="/login">'
@@ -42,7 +42,7 @@ $(document).ready(function () {
                         +   '</li>'
                     );
                 } else if (response.result === 'authenticated'){
-                    $main_menu.html(''
+                    $main_menu.prepend(''
                         // create new card btn
                         +   '<li>'
                         +       '<a role="button" id="add-card-link">'
