@@ -138,6 +138,7 @@ def upload_video(card):
         YoutubeLogger.objects.create(**kwargs)
         if settings.USE_PROXY:
             # remove socks default proxy
+            import socks
             socks._defaultproxy = None
             # desctroy ssh tunnel connection
             subprocess.Popen(['pkill', '-f', 'forward@wbmonster'])
