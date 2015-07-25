@@ -45,7 +45,7 @@ class YoutubeLoggerAdmin(admin.ModelAdmin):
     pretty_status.short_description = 'Статус'
 
     def card_link(self, obj):
-        return '<a href="{url}/">{card_info}</a>'.format(
+        return '<a href="{url}">{card_info}</a>'.format(
             url=reverse('admin:cards_card_change', args=(obj.card.pk, )), card_info=str(obj.card))
     card_link.allow_tags = True
     card_link.short_description = 'Карточка'
