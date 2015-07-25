@@ -19,7 +19,7 @@ class InstaTransactionTestCase(TransactionTestCase):
 
     def _create_admin_and_login(self):
         self.adminuser = InstaUser.objects.create_superuser('admin', 'admin@test.com', 'pass')
-        response = self.client.post('/admin/login/', dict(username='admin', password='pass'))
+        response = self.client.post('/s50admin/login/', dict(username='admin', password='pass'))
         self.assert302(response)
 
     def _create_user(self):
