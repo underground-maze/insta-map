@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'registration',
     'bootstrap3',
+    'admin_honeypot',
     # insta apps
     'accounts',
     'index',
