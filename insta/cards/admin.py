@@ -46,7 +46,7 @@ class YoutubeLoggerAdmin(admin.ModelAdmin):
 
     def card_link(self, obj):
         return '<a href="{url}/">{card_info}</a>'.format(
-            url=reverse('admin:cards_card_change' args=(obj.card.pk, )), card_info=str(obj.card))
+            url=reverse('admin:cards_card_change', args=(obj.card.pk, )), card_info=str(obj.card))
     card_link.allow_tags = True
     card_link.short_description = 'Карточка'
 
