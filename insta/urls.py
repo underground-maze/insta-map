@@ -9,7 +9,8 @@ from accounts import forms
 
 urlpatterns = (
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    url(r'^s50admin/', include(admin.site.urls)),
     url(r'^', include('index.urls')),
     url(r'^cards/', include('cards.urls', namespace='card')),
     url(r'^', include('accounts.urls')),
