@@ -24,8 +24,8 @@
         {# include maps js #}
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
+        {#  different for languages #}
         {% compress js %}
-
             <script type="text/javascript">
                 var messages = {
                     login: 'Войти',
@@ -46,13 +46,20 @@
                     card_url: '?card={id}',
                 };
             </script>
+        {% endcompress %}
 
+        {# often change #}
+        {% compress js %}
+            <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
+        {% endcompress %}
+
+        {# rare change #}
+        {% compress js %}
             {# jquery #}
             <script type="text/javascript" src="{{ STATIC_URL }}jquery-1.11.3.min.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}jquery.geolocation.min.js"></script>
             {# include maps js #}
             <script type="text/javascript" src="{{ STATIC_URL }}maps/markerclusterer.js"></script>
-            <script type="text/javascript" src="{{ STATIC_URL }}maps/polygon_path.js"></script>
             <script type="text/javascript" src="{{ STATIC_URL }}maps/maps.js"></script>
             {# include bootstrap #}
             <script type="text/javascript" src="{{ STATIC_URL }}bootstrap/bootstrap.min.js"></script>
@@ -114,8 +121,7 @@
                     <div class="col-md-2 col-md-offset-10">
                         <span style="display:inline-block;">
                             <a id="share-vk" class="btn btn-block btn-sm btn-social btn-vk" href="#" target="_blank">
-                                <i class="fa fa-vk"></i> Поделиться
-                            </a>
+                                <i class="fa fa-vk"></i> Поделиться</a>
                         </span>
                     </div>
                     <br />

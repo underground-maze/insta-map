@@ -30,7 +30,7 @@ class TestCardSignals(InstaTransactionTestCase):
         self.assertEquals('Новое открытие / Я первооткрыватель!', mail.outbox[0].subject)
         self.assertEquals(settings.DEFAULT_FROM_EMAIL, mail.outbox[0].from_email)
         self.assertEquals(['admin@test.com', ], mail.outbox[0].to)
-        self.assertIn('http://revealer.ru/admin/cards/card/{}/'.format(card.pk), mail.outbox[0].body)
+        self.assertIn('http://revealer.ru/s50admin/cards/card/{}/'.format(card.pk), mail.outbox[0].body)
         self.assertIn('multipart/alternative', mail.outbox[0].message()['Content-Type'])
 
     def test_accepted_card_email(self):
