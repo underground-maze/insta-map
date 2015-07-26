@@ -92,7 +92,8 @@ class Card(models.Model):
                 title=settings.YOUTUBE_TITLE.format(coord=self.position),
                 tags=settings.YOUTUBE_TAGS,
                 categoryId=settings.YOUTUBE_CATEGORY_ID,
-                description=self.description,
+                description='{desc}\n{site_url}/{card_id}'.format(
+                    desc=self.description, site_url=settings.SITE_URL, card_id=self.get_absolute_url()),
             ),
             status=dict(
                 privacyStatus=settings.YOUTUBE_PRIVACY_STATUS,
