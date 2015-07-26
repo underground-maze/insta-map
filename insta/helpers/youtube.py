@@ -121,8 +121,8 @@ def upload_video(card):
         # if failed uploading raise error
         if video_id is None:
             raise Exception('Video ID is None')
-        # if not any error occured remove video file from server
-        card.video.delete(False)
+        # # if not any error occured remove video file from server
+        # card.video.delete(False)
         # if success uploading save video id to card
         card.youtube_id = video_id
         card.save()
