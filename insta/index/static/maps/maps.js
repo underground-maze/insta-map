@@ -106,7 +106,8 @@ $(document).ready(function () {
         window.history.pushState(messages.site_name, label, messages.card_url.replace('{id}', card_id));
         // open modal
         $('#card-info').modal('show');
-        $('#share-vk').attr('href', 'https://vk.com/share.php?url=' + encodeURIComponent(location.href));
+        $('#share-vk').html(VK.Share.button({url: location.href,  image: card.thumb}, {type: 'custom',
+            text: '<span class="btn btn-block btn-sm btn-social btn-vk"><i class="fa fa-vk"></i> Поделиться</span>'}));
 
         return [card.latitude, card.longitude];
     };
