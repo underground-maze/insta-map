@@ -157,6 +157,7 @@ YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[0]
 # additional youtube settings
 YOUTUBE_VIDEO_URL = 'http://youtu.be/{video_id}'
 YOUTUBE_VIDEO_EMBED_URL = 'https://www.youtube.com/embed/{video_id}'
+YOUTUBE_THUMB_URL = 'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg'
 
 # video validation settings
 VIDEO_MIME_TYPES = (

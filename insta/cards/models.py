@@ -76,6 +76,10 @@ class Card(models.Model):
     def embed_video_url(self):
         return settings.YOUTUBE_VIDEO_EMBED_URL.format(video_id=self.youtube_id) if self.youtube_id else None
 
+    @property
+    def thumb_url(self):
+        return settings.YOUTUBE_THUMB_URL.format(video_id=self.youtube_id) if self.youtube_id else None
+
     def save(self, *args, **kwargs):
         # set date of check if change status from new - to other and if not checked already
         if not self.checked_at and not self.is_new:
@@ -114,7 +118,7 @@ class Card(models.Model):
         """ Return information of a card as a dict """
         return dict(
             card_id=self.pk, latitude=str(self.position.latitude), longitude=str(self.position.longitude),
-            video=self.embed_video_url, description=self.description, )
+            video=self.embed_video_url, thumb=self.thumb_url, description=self.description, )
 
 
 class YoutubeLogger(models.Model):
