@@ -151,7 +151,9 @@ YOUTUBE_CLIENT_SECRET = '<secret>'
 YOUTUBE_CHUNKSIZE = -1
 YOUTUBE_CATEGORY_ID = 19  # travel
 YOUTUBE_TITLE = 'I am discoverer {coord}'
-YOUTUBE_TAGS = 'discover, travel, worl, pioner, selfie'
+YOUTUBE_TAGS = (
+    'discover', 'travel', 'world', 'pioner', 'selfie',
+    'открытие', 'первооткрыватель', 'мир', 'путешествия', 'селфи')
 YOUTUBE_VALID_PRIVACY_STATUSES = ('public', 'private', 'unlisted')
 YOUTUBE_PRIVACY_STATUS = YOUTUBE_VALID_PRIVACY_STATUSES[0]
 # additional youtube settings
