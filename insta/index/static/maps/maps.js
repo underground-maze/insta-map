@@ -99,7 +99,7 @@ $(document).ready(function () {
         var $modal = $('.modal#card-info'),
             label = messages.site_name + ' {coord}';
 
-        $modal.find('iframe').attr('src', card.video);
+        $modal.find('iframe#youtube_video').attr('src', card.video);
         $modal.find('div[name="description"]').text(card.description);
         $modal.find('#card-info-label').text(label.replace('{coord}', card.latitude + ', ' + card.longitude));
         // change url
@@ -140,6 +140,10 @@ $(document).ready(function () {
 
     $('#add-card').on('shown.bs.modal', function(){
         $.geolocation.get({win: get_position, fail: no_position});
+    });
+
+    $('#card-info').on('hidden.bs.modal', function(){
+        $('.modal#card-info').find('iframe#youtube_video').attr('src', 'https://www.youtube.com/embed/');
     });
 
     init_map();
