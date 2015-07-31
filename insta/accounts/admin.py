@@ -15,5 +15,12 @@ class InstaUserAdmin(UserAdmin):
 
     form = InstaUserChangeForm
 
+    list_display = UserAdmin.list_display + ('has_cards', )
+
+    def has_cards(self, obj):
+        return obj.card_set.all().exists()
+    has_cards.boolean = True
+    has_cards.short_description = 'Карточки'
+
 
 admin.site.register(InstaUser, InstaUserAdmin)
