@@ -15,6 +15,12 @@
         <meta property="og:description" content="Каждый из нас первооткрыватель, стоит только лишь почувствовать дуновение ветра странствий и Вы отправитесь в путь. Познавать неизведанные земли, открывать новые горизонты, стирать белые пятна с карты... Так давайте же вместе, откроем наш огромный мир заново!">
         <meta property="og:image" content="{{ STATIC_URL }}share.jpg">
 
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Я первооткрыватель!">
+        <meta name="twitter:description" content="Каждый из нас первооткрыватель, стоит только лишь почувствовать дуновение ветра странствий и Вы отправитесь в путь...">
+        <meta name="twitter:image:src" content="{{ STATIC_URL }}share.jpg">
+        <meta name="twitter:domain" content="revealer.ru">
+
         {% compress css %}
             <style>
                 div#map-canvas {height: 100vh}
@@ -125,11 +131,14 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class='col-md-12'>
-                        <a id="share-vk" class="btn btn-sm btn-social btn-vk" href="#" target="_blank">
+                        <a id="share-vk" class="btn btn-sm btn-social btn-vk" href="#" target="_blank"
+                            onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                             <i class="fa fa-vk"></i> Поделиться</a>
-                        <a id="share-twitter" class="btn btn-sm btn-social btn-twitter" href="#" target="_blank">
+                        <a id="share-twitter" class="btn btn-sm btn-social btn-twitter" href="#" target="_blank"
+                            onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                             <i class="fa fa-twitter"></i> Твитнуть</a>
-                        <a id="share-facebook" class="btn btn-sm btn-social btn-facebook" href="#" target="_blank">
+                        <a id="share-facebook" class="btn btn-sm btn-social btn-facebook" href="#" target="_blank"
+                            onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                             <i class="fa fa-facebook-square"></i> Рассказать</a>
                         <hr />
                     </div>

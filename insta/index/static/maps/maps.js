@@ -107,6 +107,8 @@ $(document).ready(function () {
         // open modal
         $('#card-info').modal('show');
         $('#share-vk').attr('href', 'https://vk.com/share.php?url=' + encodeURIComponent(location.href) + '&image=' + encodeURIComponent(card.thumb));
+        $('#share-twitter').attr('href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(location.href));
+        $('#share-facebook').attr('href', 'http://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href));
 
         return [card.latitude, card.longitude];
     };
