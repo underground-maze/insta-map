@@ -108,7 +108,7 @@ $(document).ready(function () {
         $('#card-info').modal('show');
         $('#share-vk').attr('href', 'https://vk.com/share.php?url=' + encodeURIComponent(location.href) + '&image=' + encodeURIComponent(card.thumb));
         $('#share-twitter').attr('href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(location.href));
-        $('#share-facebook').attr('href', 'http://www.facebook.com/sharer.php?p[url]=' + encodeURIComponent(location.href) + 'p[images][0]=' + encodeURIComponent(card.thumb));
+        $('#share-facebook').attr('href', 'https://www.facebook.com/dialog/feed?app_id=834251373317741&display=popup&link=' + encodeURIComponent(location.href) + '&picture=' + encodeURIComponent(card.thumb));
 
         return [card.latitude, card.longitude];
     };
