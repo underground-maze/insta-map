@@ -107,7 +107,8 @@ $(document).ready(function () {
         // open modal
         $('#card-info').modal('show');
         $('#share-vk').attr('href', 'https://vk.com/share.php?url=' + encodeURIComponent(location.href) + '&image=' + encodeURIComponent(card.thumb));
-        $('#share-twitter').attr('href', 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(location.href));
+        $('#share-twitter').attr('href', 'https://twitter.com/intent/tweet?url='
+            + encodeURIComponent(location.href) + '&text=' + (messages.site_name + card.description).slice(0, 100) + '...');
         $('#share-facebook').attr('href', 'https://www.facebook.com/dialog/feed?app_id=834251373317741&link='
             + encodeURIComponent(location.href) + '&picture=' + encodeURIComponent(card.thumb) + '&redirect_uri=' + encodeURIComponent(location.href));
 
