@@ -73,8 +73,50 @@ $(document).ready(function () {
             draggable: true,
         });
 
+        // set geo search
+        var geo_search_input = document.getElementById('pac-input');
 
         var mini_map = new google.maps.Map(document.getElementById('mini-map-canvas'), mini_map_options);
+
+        mini_map.controls[google.maps.ControlPosition.TOP_LEFT].push(geo_search_input);
+
+        var search_box = new google.maps.places.SearchBox(/** @type {HTMLInputElement} */(geo_search_input));
+
+        google.maps.event.addListener(search_box, 'places_changed', function() {
+            var places = search_box.getPlaces();
+            if (places.length == 0) {return; }
+            // clear old markers
+            for (var i = 0, marker; marker = markers[i]; i++) {marker.setMap(null);}
+            // For each place, get the icon, place name, and location.
+            markers = [];
+            var bounds = new google.maps.LatLngBounds();
+            for (var i = 0, place; place = places[i]; i++) {
+                var image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+            // Create a marker for each place.
+            var marker = new google.maps.Marker({
+                map: mini_map,
+                icon: image,
+                title: place.name,
+                position: place.geometry.location
+            });
+
+            markers.push(marker);
+
+            bounds.extend(place.geometry.location); }
+
+            mini_map.fitBounds(bounds);
+        });
+
+        google.maps.event.addListener(mini_map, 'bounds_changed', function() {
+            var bounds = mini_map.getBounds();
+            search_box.setBounds(bounds);
+        });
 
         marker.setMap(mini_map);
 
@@ -82,10 +124,15 @@ $(document).ready(function () {
             $('#add-card').find('input[name="position"]').val(marker.position)
         });
 
+        google.maps.event.addListener(mini_map, 'click', function(e) {
+            marker.setPosition(e.latLng);
+            $('#add-card').find('input[name="position"]').val(marker.position)
+        });
+
         var circle = new google.maps.Circle({
             center: position,
             map: mini_map,
-            radius: 5000,
+            radius: 3000,
             strokeColor: "#AAAAAA", strokeOpacity: 0.8, strokeWeight: 2,
             fillColor: '#EEEEEE', fillOpacity: 0.3,
         });

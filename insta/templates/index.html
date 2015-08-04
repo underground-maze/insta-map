@@ -25,6 +25,8 @@
             <style>
                 div#map-canvas {height: 100vh}
                 div#mini-map-canvas {height: 460px; padding: 0px; margin: 0px;}
+                input#pac-input {margin: 17px; max-width: 360px; }
+                .pac-container{z-index: 999999;}
             </style>
 
             <link href="{{ STATIC_URL }}fontawesome/font-awesome.min.css" rel="stylesheet" />
@@ -33,7 +35,7 @@
         {% endcompress %}
 
         {# include maps js #}
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 
         {#  different for languages #}
         {% compress js %}
@@ -160,6 +162,7 @@
 
                 <div class="modal-body">
                     <div id="mini-map-canvas"></div>
+                    <input id="pac-input" class="form-control" maxlength="200" placeholder="Поиск..." />
 
                     <form id="add-card-form" action="{% url 'card:add' %}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
