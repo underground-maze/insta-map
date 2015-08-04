@@ -111,7 +111,7 @@ $(document).ready(function () {
                 bounds.extend(place.geometry.location);
             }
 
-            bounds.extend(marker);
+            bounds.extend(marker.position);
 
             mini_map.fitBounds(bounds);
         });
