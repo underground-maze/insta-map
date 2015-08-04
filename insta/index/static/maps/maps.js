@@ -98,17 +98,20 @@ $(document).ready(function () {
                     anchor: new google.maps.Point(17, 34),
                     scaledSize: new google.maps.Size(25, 25)
                 };
-            // Create a marker for each place.
-            var marker = new google.maps.Marker({
-                map: mini_map,
-                icon: image,
-                title: place.name,
-                position: place.geometry.location
-            });
+                // Create a marker for each place.
+                var marker = new google.maps.Marker({
+                    map: mini_map,
+                    icon: image,
+                    title: place.name,
+                    position: place.geometry.location
+                });
 
-            markers.push(marker);
+                markers.push(marker);
 
-            bounds.extend(place.geometry.location); }
+                bounds.extend(place.geometry.location);
+            }
+
+            bounds.extend(marker);
 
             mini_map.fitBounds(bounds);
         });
