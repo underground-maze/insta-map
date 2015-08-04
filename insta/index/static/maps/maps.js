@@ -68,7 +68,7 @@ $(document).ready(function () {
             scaleControl: true,
             streetViewControl: false,
         };
-        var marker = new google.maps.Marker({
+        var point_marker = new google.maps.Marker({
             position: position,
             draggable: true,
         });
@@ -111,7 +111,7 @@ $(document).ready(function () {
                 bounds.extend(place.geometry.location);
             }
 
-            bounds.extend(marker.position);
+            bounds.extend(point_marker.position);
 
             mini_map.fitBounds(bounds);
         });
@@ -121,15 +121,15 @@ $(document).ready(function () {
             search_box.setBounds(bounds);
         });
 
-        marker.setMap(mini_map);
+        point_marker.setMap(mini_map);
 
-        google.maps.event.addListener(marker, 'dragend', function() {
-            $('#add-card').find('input[name="position"]').val(marker.position)
+        google.maps.event.addListener(point_marker, 'dragend', function() {
+            $('#add-card').find('input[name="position"]').val(point_marker.position)
         });
 
         google.maps.event.addListener(mini_map, 'click', function(e) {
-            marker.setPosition(e.latLng);
-            $('#add-card').find('input[name="position"]').val(marker.position)
+            point_marker.setPosition(e.latLng);
+            $('#add-card').find('input[name="position"]').val(point_marker.position)
         });
 
         var circle = new google.maps.Circle({
@@ -139,7 +139,7 @@ $(document).ready(function () {
             strokeColor: "#AAAAAA", strokeOpacity: 0.8, strokeWeight: 2,
             fillColor: '#EEEEEE', fillOpacity: 0.3,
         });
-        circle.bindTo('center', marker, 'position');
+        circle.bindTo('center', point_marker, 'position');
 
     };
 
