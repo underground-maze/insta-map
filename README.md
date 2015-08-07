@@ -1,8 +1,6 @@
 # insta-map
 [![Build Status](https://travis-ci.org/underground-maze/insta-map.svg)](https://travis-ci.org/underground-maze/insta-map)
 
-map with user selfies
-
 Эпоха Великих географических открытий давно миновала.
 
 Казалось бы, с карты стерты все белые пятна, всюду ступала нога человека, мир познан и нечего больше открывать. Но это не так!
