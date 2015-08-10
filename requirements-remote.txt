@@ -18,4 +18,4 @@ django-recaptcha==1.0.4
 python-social-auth==0.2.12
 django-registration-redux==1.2
 django-bootstrap3==6.1.0
-django-admin-honeypot==0.4.0
+-e git://github.com/Samael500/django-admin-honeypot.git@develop#egg=django-admin-honeypot
