@@ -23,6 +23,7 @@ if __name__ in ('settings', 'insta.settings'):
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '7dkzasdd3by1p7431*j243s611&!xxsagko*bee1&by!)mt2#%w'
+ADMIN_HONEYPOT_IP_HEADER = 'HTTP_X_REAL_IP'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
