@@ -3,7 +3,7 @@ $(document).ready(function () {
     var $main_menu = $('#main-menu'),
         $form = $('#add-card-form'),
         $progress = $('div.progress-bar'),
-        fields = ['position', /*'email',*/ 'description', 'video', 'captcha'],
+        fields = ['position', /*'email',*/ 'description', 'video', /* 'captcha' */],
         error_class = 'has-error',
         error_template = '<li class="control-label">{msg}</li>',
         error_container_template = 'ul#errors-',
@@ -132,13 +132,13 @@ $(document).ready(function () {
             }
         }
 
-        // validate re captcha
-        var value = grecaptcha.getResponse();
-        if (!value.trim()){
-            is_valid = false;
-            // set required msg error
-            errors['captcha'] = [messages.required_error];
-        }
+        // // validate re captcha
+        // var value = grecaptcha.getResponse();
+        // if (!value.trim()){
+        //     is_valid = false;
+        //     // set required msg error
+        //     errors['captcha'] = [messages.required_error];
+        // }
 
         // insert errors
         insert_errors(errors);
