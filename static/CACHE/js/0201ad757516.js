@@ -1,0 +1,1 @@
+(function(){grp.jQuery(document).ready(function(){var $,$link;$=grp.jQuery;$link=$('#site_update');$link.on('click',function(){return $.ajax({type:'POST',url:'/update',success:function(response){alert('Обновление сайта успешно запущено, подождите пару минут пока будут применены изменения.');}});});});}).call(this);
