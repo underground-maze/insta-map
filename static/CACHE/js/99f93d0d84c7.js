@@ -41,5 +41,7 @@ $parent.empty();$parent.html(''
 +'<p>'
 +messages.form_success
 +'</p>'
-+'</div>');},error:function(response){var data=response.responseJSON;if(data.result==='errors'){insert_errors(data.errors);}},beforeSend:function(){$form.find('button[type="submit"]').attr('disabled',true);$progress.attr('aria-valuenow',0);$progress.attr('aria-valuemax',video_size);$progress.attr('style','width: 0%');},complete:function(){$form.find('button[type="submit"]').attr('disabled',false);}});return false;});get_main_menu();});$(document).ready(function(){if(typeof YOUTUBE_VIDEO_MARGIN=='undefined'){YOUTUBE_VIDEO_MARGIN=5;}
++'</div>');},error:function(response){var data=response.responseJSON;if(data.result==='errors'){insert_errors(data.errors);}},beforeSend:function(){$form.find('button[type="submit"]').attr('disabled',true);$progress.attr('aria-valuenow',0);$progress.attr('aria-valuemax',video_size);$progress.attr('style','width: 0%');},complete:function(){$form.find('button[type="submit"]').attr('disabled',false);}});return false;});
+// get_main_menu();
+});$(document).ready(function(){if(typeof YOUTUBE_VIDEO_MARGIN=='undefined'){YOUTUBE_VIDEO_MARGIN=5;}
 $('iframe').each(function(index,item){if($(item).attr('src').match(/(https?:)?\/\/www\.youtube\.com/)){var w=$(item).attr('width');var h=$(item).attr('height');var ar=h/w*100;ar=ar.toFixed(2);$(item).css('position','absolute');$(item).css('top','0');$(item).css('left','0');$(item).css('width','100%');$(item).css('height','100%');$(item).css('max-width',w+'px');$(item).css('max-height',h+'px');$(item).wrap('<div style="max-width:'+w+'px;margin:0 auto; padding:'+YOUTUBE_VIDEO_MARGIN+'px;" />');$(item).wrap('<div style="position: relative;padding-bottom: '+ar+'%; height: 0; overflow: hidden;" />');}});});
